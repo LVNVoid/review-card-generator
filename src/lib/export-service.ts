@@ -12,13 +12,22 @@ export interface ExportOptions {
  * Capture DOM element to 300 DPI PNG Data URL
  */
 export async function captureCardToPng(element: HTMLElement): Promise<string> {
-  // Use pixel ratio 4 for crisp 300+ DPI print quality
-  return toPng(element, {
-    pixelRatio: 4,
-    cacheBust: true,
-    quality: 1.0,
-    backgroundColor: "transparent",
-  });
+  // Temporarily reset CSS scale transform to guarantee 1:1 crisp 300+ DPI physical export
+  const originalTransform = element.style.transform;
+  const originalTransformOrigin = element.style.transformOrigin;
+  element.style.transform = "none";
+
+  try {
+    return await toPng(element, {
+      pixelRatio: 4,
+      cacheBust: true,
+      quality: 1.0,
+      backgroundColor: "transparent",
+    });
+  } finally {
+    element.style.transform = originalTransform;
+    element.style.transformOrigin = originalTransformOrigin;
+  }
 }
 
 /**

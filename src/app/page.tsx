@@ -191,7 +191,7 @@ export default function WorkbenchPage() {
             activeMobileTab === "editor" ? "hidden md:block" : "block"
           }`}
         >
-          <div className="bg-surface rounded-2xl border border-border p-6 sm:p-8 space-y-6 shadow-2xl">
+          <div className="bg-surface rounded-2xl border border-border p-4 sm:p-8 space-y-5 sm:space-y-6 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div className="flex items-center gap-2.5">
                 <Printer className="w-4 h-4 text-google-blue" />
