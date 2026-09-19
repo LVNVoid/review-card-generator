@@ -97,8 +97,13 @@ export function MinimalistCard({ config }: TemplateProps) {
               size={metrics.qrSize}
             />
             <span className="text-[9px] font-bold tracking-widest text-zinc-900 mt-1.5 text-center font-google-sans">
-              SCAN QR
+              {config.isDynamicMode ? "SCAN AKTIVASI" : "SCAN QR"}
             </span>
+            {config.isDynamicMode && config.cardId && (
+              <span className="text-[7.5px] font-mono text-zinc-500 -mt-0.5">
+                ID: {config.cardId}
+              </span>
+            )}
           </div>
         </div>
       ) : (
@@ -151,11 +156,16 @@ export function MinimalistCard({ config }: TemplateProps) {
 
           <div className="w-full space-y-1 shrink-0 pt-1 border-t border-zinc-200">
             <div className="inline-flex items-center justify-center px-4 py-1.5 border border-zinc-900 text-zinc-900 text-[10px] font-bold tracking-wider font-google-sans">
-              <span>SCAN KODE QR DI ATAS</span>
+              <span>{config.isDynamicMode ? "SCAN UNTUK AKTIVASI" : "SCAN KODE QR DI ATAS"}</span>
             </div>
             <p className="text-[9px] text-zinc-600 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
               {config.callToAction}
             </p>
+            {config.isDynamicMode && config.cardId && (
+              <p className="text-[7.5px] font-mono font-bold text-zinc-500">
+                SERIAL: {config.cardId}
+              </p>
+            )}
           </div>
         </div>
       )}

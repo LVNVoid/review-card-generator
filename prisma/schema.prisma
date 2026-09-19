@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CardStatus {
+  PENDING
+  ACTIVE
+  INACTIVE
+}
+
+model Card {
+  id              String      @id
+  status          CardStatus  @default(PENDING)
+  businessName    String?
+  tagline         String?
+  googleReviewUrl String?
+  pinHash         String?
+  salt            String?
+  batchId         String?
+  scanCount       Int         @default(0)
+  activatedAt     DateTime?
+  lastScannedAt   DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([status])
+  @@index([batchId])
+}

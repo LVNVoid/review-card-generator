@@ -99,8 +99,13 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
               size={metrics.qrSize}
             />
             <span className="text-[9px] font-bold font-mono tracking-wider text-zinc-900 mt-1.5 text-center">
-              SCAN TO REVIEW
+              {config.isDynamicMode ? "SCAN AKTIVASI" : "SCAN TO REVIEW"}
             </span>
+            {config.isDynamicMode && config.cardId && (
+              <span className="text-[7.5px] font-mono text-zinc-600 -mt-0.5">
+                ID: {config.cardId}
+              </span>
+            )}
           </div>
         </div>
       ) : (
@@ -156,11 +161,16 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
           {/* Bottom Action */}
           <div className="w-full space-y-1 shrink-0 pt-1">
             <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-zinc-800 border border-zinc-700 text-google-yellow text-[10px] font-mono font-bold tracking-wider shadow-sm">
-              <span>SCAN KODE QR DI ATAS</span>
+              <span>{config.isDynamicMode ? "SCAN UNTUK AKTIVASI" : "SCAN KODE QR DI ATAS"}</span>
             </div>
             <p className="text-[9px] text-zinc-400 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
               {config.callToAction}
             </p>
+            {config.isDynamicMode && config.cardId && (
+              <p className="text-[7.5px] font-mono text-zinc-500">
+                SERIAL: {config.cardId}
+              </p>
+            )}
           </div>
         </div>
       )}

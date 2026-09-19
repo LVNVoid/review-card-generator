@@ -110,6 +110,8 @@ export const CardConfigSchema = z.object({
   showRatingStars: z.boolean().default(true),
   showNfcIcon: z.boolean().default(true),
   includeBleedMarks: z.boolean().default(false),
+  isDynamicMode: z.boolean().optional().default(false),
+  cardId: z.string().optional(),
 });
 
 export type CardConfig = z.infer<typeof CardConfigSchema>;

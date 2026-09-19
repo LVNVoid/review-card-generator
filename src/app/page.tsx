@@ -27,6 +27,7 @@ export default function WorkbenchPage() {
     showRatingStars: true,
     showNfcIcon: true,
     includeBleedMarks: false,
+    isDynamicMode: false,
   });
 
   const handleConfigChange = (updated: Partial<CardConfig>) => {
