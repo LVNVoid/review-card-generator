@@ -35,7 +35,7 @@ export function MinimalistCard({ config }: TemplateProps) {
   return (
     <div
       className={cn(
-        "relative bg-card-white text-zinc-900 shadow-xl overflow-hidden flex flex-col justify-between select-none transition-all border-2 border-zinc-900 box-border",
+        "relative bg-card-white text-zinc-900 shadow-xl overflow-hidden flex flex-col justify-between select-none transition-all border-2 border-zinc-900 box-border font-google-sans",
         config.includeBleedMarks && "ring-1 ring-offset-2 ring-zinc-900/40"
       )}
       style={{
@@ -56,7 +56,7 @@ export function MinimalistCard({ config }: TemplateProps) {
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <GoogleLogo size={22} />
-                <span className="text-[10px] font-mono font-black tracking-widest text-zinc-900 uppercase">
+                <span className="text-[10px] font-bold tracking-widest text-zinc-900 uppercase font-google-sans">
                   RATE & REVIEW
                 </span>
                 {config.showNfcIcon && (
@@ -67,11 +67,11 @@ export function MinimalistCard({ config }: TemplateProps) {
                 )}
               </div>
 
-              <h2 className="text-sm font-black text-zinc-900 leading-snug line-clamp-2 pt-0.5">
+              <h2 className="text-sm font-black text-zinc-900 leading-snug line-clamp-2 pt-0.5 font-google-sans tracking-tight">
                 {config.businessName || "Nama Tempat Usaha"}
               </h2>
 
-              <p className="text-[10px] text-zinc-600 font-medium leading-tight line-clamp-1">
+              <p className="text-[10px] text-zinc-600 font-medium leading-tight line-clamp-1 font-google-sans-text">
                 {config.tagline}
               </p>
             </div>
@@ -80,11 +80,11 @@ export function MinimalistCard({ config }: TemplateProps) {
               {config.showRatingStars && (
                 <div className="flex items-center gap-1.5">
                   <GoogleReviewStars size={15} />
-                  <span className="text-[11px] font-black text-zinc-900">5.0</span>
+                  <span className="text-[11px] font-black text-zinc-900 font-google-sans">5.0</span>
                 </div>
               )}
 
-              <p className="text-[9px] text-zinc-600 font-normal leading-tight line-clamp-2">
+              <p className="text-[9px] text-zinc-600 font-normal leading-tight line-clamp-2 font-google-sans-text">
                 {config.callToAction}
               </p>
             </div>
@@ -96,7 +96,7 @@ export function MinimalistCard({ config }: TemplateProps) {
               logoDataUrl={config.logoDataUrl}
               size={metrics.qrSize}
             />
-            <span className="text-[9px] font-mono font-black tracking-widest text-zinc-900 mt-1.5 text-center">
+            <span className="text-[9px] font-bold tracking-widest text-zinc-900 mt-1.5 text-center font-google-sans">
               SCAN QR
             </span>
           </div>
@@ -108,7 +108,7 @@ export function MinimalistCard({ config }: TemplateProps) {
             <div className="flex items-center justify-between w-full mb-0.5 px-0.5">
               <div className="flex items-center gap-1.5">
                 <GoogleLogo size={isSquare ? 20 : 24} />
-                <span className="text-xs font-mono font-black tracking-widest text-zinc-900 uppercase">
+                <span className="text-xs font-bold tracking-widest text-zinc-900 uppercase font-google-sans">
                   RATE & REVIEW
                 </span>
               </div>
@@ -122,21 +122,21 @@ export function MinimalistCard({ config }: TemplateProps) {
 
             <h2
               className={cn(
-                "font-black text-zinc-900 leading-tight px-1",
+                "font-black text-zinc-900 leading-tight px-1 font-google-sans tracking-tight",
                 isSquare ? "text-xs line-clamp-1" : "text-sm sm:text-base line-clamp-2"
               )}
             >
               {config.businessName || "Nama Tempat Usaha"}
             </h2>
 
-            <p className="text-[10px] sm:text-[11px] text-zinc-600 font-medium px-2 line-clamp-1">
+            <p className="text-[10px] sm:text-[11px] text-zinc-600 font-medium px-2 line-clamp-1 font-google-sans-text">
               {config.tagline}
             </p>
 
             {config.showRatingStars && (
               <div className="pt-0.5 flex items-center justify-center gap-1.5">
                 <GoogleReviewStars size={isSquare ? 14 : 16} />
-                <span className="text-[11px] font-black text-zinc-900">5.0</span>
+                <span className="text-[11px] font-black text-zinc-900 font-google-sans">5.0</span>
               </div>
             )}
           </div>
@@ -150,10 +150,10 @@ export function MinimalistCard({ config }: TemplateProps) {
           </div>
 
           <div className="w-full space-y-1 shrink-0 pt-1 border-t border-zinc-200">
-            <div className="inline-flex items-center justify-center px-4 py-1.5 border border-zinc-900 text-zinc-900 text-[10px] font-mono font-bold tracking-wider">
+            <div className="inline-flex items-center justify-center px-4 py-1.5 border border-zinc-900 text-zinc-900 text-[10px] font-bold tracking-wider font-google-sans">
               <span>SCAN KODE QR DI ATAS</span>
             </div>
-            <p className="text-[9px] text-zinc-600 font-medium px-2 leading-tight line-clamp-1">
+            <p className="text-[9px] text-zinc-600 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
               {config.callToAction}
             </p>
           </div>

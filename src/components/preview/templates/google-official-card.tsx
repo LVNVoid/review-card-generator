@@ -35,7 +35,7 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
   return (
     <div
       className={cn(
-        "relative bg-card-white text-zinc-900 shadow-xl overflow-hidden flex flex-col justify-between select-none transition-all box-border",
+        "relative bg-card-white text-zinc-900 shadow-xl overflow-hidden flex flex-col justify-between select-none transition-all box-border font-google-sans",
         config.includeBleedMarks && "ring-1 ring-offset-2 ring-google-red/40"
       )}
       style={{
@@ -57,7 +57,7 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <GoogleLogo size={22} />
-                <span className="text-[11px] font-bold tracking-wider text-google-blue uppercase">
+                <span className="text-[11px] font-bold tracking-wider text-google-blue uppercase font-google-sans">
                   Google Review
                 </span>
                 {config.showNfcIcon && (
@@ -68,11 +68,11 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
                 )}
               </div>
 
-              <h2 className="text-sm font-black text-zinc-900 leading-snug line-clamp-2 pt-0.5">
+              <h2 className="text-sm font-black text-zinc-900 leading-snug line-clamp-2 pt-0.5 font-google-sans tracking-tight">
                 {config.businessName || "Nama Tempat Usaha"}
               </h2>
 
-              <p className="text-[10px] text-zinc-600 font-medium leading-tight line-clamp-1">
+              <p className="text-[10px] text-zinc-600 font-medium leading-tight line-clamp-1 font-google-sans-text">
                 {config.tagline}
               </p>
             </div>
@@ -81,11 +81,11 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
               {config.showRatingStars && (
                 <div className="flex items-center gap-1.5">
                   <GoogleReviewStars size={15} />
-                  <span className="text-[11px] font-bold text-zinc-800">5.0</span>
+                  <span className="text-[11px] font-bold text-zinc-800 font-google-sans">5.0</span>
                 </div>
               )}
 
-              <p className="text-[9px] text-zinc-500 font-medium leading-tight line-clamp-2">
+              <p className="text-[9px] text-zinc-500 font-medium leading-tight line-clamp-2 font-google-sans-text">
                 {config.callToAction}
               </p>
             </div>
@@ -98,7 +98,7 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
               logoDataUrl={config.logoDataUrl}
               size={metrics.qrSize}
             />
-            <span className="text-[9px] font-bold font-mono tracking-wider text-google-blue mt-1.5 text-center">
+            <span className="text-[9px] font-bold font-google-sans tracking-wider text-google-blue mt-1.5 text-center">
               SCAN TO REVIEW
             </span>
           </div>
@@ -111,7 +111,7 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
             <div className="flex items-center justify-between w-full mb-0.5 px-0.5">
               <div className="flex items-center gap-1.5">
                 <GoogleLogo size={isSquare ? 20 : 24} />
-                <span className="text-xs font-bold tracking-wider text-google-blue uppercase">
+                <span className="text-xs font-bold tracking-wider text-google-blue uppercase font-google-sans">
                   Google Review
                 </span>
               </div>
@@ -125,21 +125,21 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
 
             <h2
               className={cn(
-                "font-black text-zinc-900 leading-tight px-1",
+                "font-black text-zinc-900 leading-tight px-1 font-google-sans tracking-tight",
                 isSquare ? "text-xs line-clamp-1" : "text-sm sm:text-base line-clamp-2"
               )}
             >
               {config.businessName || "Nama Tempat Usaha"}
             </h2>
 
-            <p className="text-[10px] sm:text-[11px] text-zinc-600 font-medium px-2 line-clamp-1">
+            <p className="text-[10px] sm:text-[11px] text-zinc-600 font-medium px-2 line-clamp-1 font-google-sans-text">
               {config.tagline}
             </p>
 
             {config.showRatingStars && (
               <div className="pt-0.5 flex items-center justify-center gap-1.5">
                 <GoogleReviewStars size={isSquare ? 14 : 16} />
-                <span className="text-[11px] font-bold text-zinc-800">5.0</span>
+                <span className="text-[11px] font-bold text-zinc-800 font-google-sans">5.0</span>
               </div>
             )}
           </div>
@@ -155,10 +155,10 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
 
           {/* Bottom Call to Action */}
           <div className="w-full space-y-1 shrink-0 pt-1">
-            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-google-blue text-white text-[10px] font-bold tracking-wider shadow-sm">
+            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-google-blue text-white text-[10px] font-bold font-google-sans tracking-wider shadow-sm">
               <span>SCAN KODE QR DI ATAS</span>
             </div>
-            <p className="text-[9px] text-zinc-500 font-medium px-2 leading-tight line-clamp-1">
+            <p className="text-[9px] text-zinc-500 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
               {config.callToAction}
             </p>
           </div>

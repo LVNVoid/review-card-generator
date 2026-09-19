@@ -35,7 +35,7 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
   return (
     <div
       className={cn(
-        "relative bg-card-dark text-white shadow-2xl overflow-hidden flex flex-col justify-between select-none transition-all border border-card-border-dark box-border",
+        "relative bg-card-dark text-white shadow-2xl overflow-hidden flex flex-col justify-between select-none transition-all border border-card-border-dark box-border font-google-sans",
         config.includeBleedMarks && "ring-1 ring-offset-2 ring-google-yellow/40"
       )}
       style={{
@@ -68,11 +68,11 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
                 )}
               </div>
 
-              <h2 className="text-sm font-black text-white leading-snug line-clamp-2 pt-0.5">
+              <h2 className="text-sm font-black text-white leading-snug line-clamp-2 pt-0.5 font-google-sans tracking-tight">
                 {config.businessName || "Nama Tempat Usaha"}
               </h2>
 
-              <p className="text-[10px] text-zinc-400 font-medium leading-tight line-clamp-1">
+              <p className="text-[10px] text-zinc-400 font-medium leading-tight line-clamp-1 font-google-sans-text">
                 {config.tagline}
               </p>
             </div>
@@ -81,11 +81,11 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
               {config.showRatingStars && (
                 <div className="flex items-center gap-1.5">
                   <GoogleReviewStars size={15} />
-                  <span className="text-[11px] font-bold text-google-yellow">5.0</span>
+                  <span className="text-[11px] font-bold text-google-yellow font-google-sans">5.0</span>
                 </div>
               )}
 
-              <p className="text-[9px] text-zinc-400 font-normal leading-tight line-clamp-2">
+              <p className="text-[9px] text-zinc-400 font-normal leading-tight line-clamp-2 font-google-sans-text">
                 {config.callToAction}
               </p>
             </div>
@@ -125,21 +125,21 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
 
             <h2
               className={cn(
-                "font-black text-white leading-tight px-1",
+                "font-black text-white leading-tight px-1 font-google-sans tracking-tight",
                 isSquare ? "text-xs line-clamp-1" : "text-sm sm:text-base line-clamp-2"
               )}
             >
               {config.businessName || "Nama Tempat Usaha"}
             </h2>
 
-            <p className="text-[10px] sm:text-[11px] text-zinc-400 font-medium px-2 line-clamp-1">
+            <p className="text-[10px] sm:text-[11px] text-zinc-400 font-medium px-2 line-clamp-1 font-google-sans-text">
               {config.tagline}
             </p>
 
             {config.showRatingStars && (
               <div className="pt-0.5 flex items-center justify-center gap-1.5">
                 <GoogleReviewStars size={isSquare ? 14 : 16} />
-                <span className="text-[11px] font-bold text-google-yellow">5.0</span>
+                <span className="text-[11px] font-bold text-google-yellow font-google-sans">5.0</span>
               </div>
             )}
           </div>
@@ -158,7 +158,7 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
             <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-zinc-800 border border-zinc-700 text-google-yellow text-[10px] font-mono font-bold tracking-wider shadow-sm">
               <span>SCAN KODE QR DI ATAS</span>
             </div>
-            <p className="text-[9px] text-zinc-400 font-medium px-2 leading-tight line-clamp-1">
+            <p className="text-[9px] text-zinc-400 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
               {config.callToAction}
             </p>
           </div>

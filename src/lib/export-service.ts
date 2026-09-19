@@ -12,6 +12,11 @@ export interface ExportOptions {
  * Capture DOM element to 300 DPI PNG Data URL
  */
 export async function captureCardToPng(element: HTMLElement): Promise<string> {
+  // Ensure all custom fonts (Google Sans, etc.) are fully loaded before rasterization
+  if (typeof document !== "undefined" && document.fonts) {
+    await document.fonts.ready;
+  }
+
   // Temporarily reset CSS scale transform to guarantee 1:1 crisp 300+ DPI physical export
   const originalTransform = element.style.transform;
   const originalTransformOrigin = element.style.transformOrigin;
