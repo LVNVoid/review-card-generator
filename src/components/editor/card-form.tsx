@@ -5,7 +5,7 @@ import { CardConfig } from "@/types/card";
 import { resolveReviewUrl } from "@/lib/google-review-url";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CheckCircle2, AlertCircle, HelpCircle } from "lucide-react";
+import { CheckCircle2, HelpCircle } from "lucide-react";
 
 interface CardFormProps {
   config: CardConfig;
@@ -38,13 +38,13 @@ export function CardForm({ config, onChange }: CardFormProps) {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {/* Google Review URL / Place ID Input */}
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
           <Label required>Link Review Google Maps / Place ID</Label>
-          <span className="text-[11px] text-accent flex items-center gap-1 font-medium">
-            <HelpCircle className="w-3 h-3" />
+          <span className="text-[11px] text-secondary flex items-center gap-1 font-mono">
+            <HelpCircle className="w-3 h-3 text-secondary" />
             Opsi A: Gratis tanpa API Key
           </span>
         </div>
@@ -56,15 +56,15 @@ export function CardForm({ config, onChange }: CardFormProps) {
         />
         <div className="flex items-center gap-1.5 text-[11px]">
           {urlStatus.isValid ? (
-            <span className="text-google-green flex items-center gap-1 font-medium">
+            <span className="text-google-green flex items-center gap-1 font-mono">
               <CheckCircle2 className="w-3.5 h-3.5" />
               {urlStatus.type === "place_id"
-                ? "Google Place ID terdeteksi (Otomatis diarahkan ke halaman write review)"
-                : "Format URL review valid"}
+                ? "Google Place ID terdeteksi (Otomatis diarahkan ke write review)"
+                : "Format URL review terverifikasi"}
             </span>
           ) : (
-            <span className="text-secondary">
-              Contoh link: <code className="bg-surface-muted px-1.5 py-0.5 rounded font-mono text-[10px]">https://g.page/r/your-business/review</code> atau Place ID: <code className="bg-surface-muted px-1.5 py-0.5 rounded font-mono text-[10px]">ChIJ...</code>
+            <span className="text-secondary font-mono text-[10px]">
+              Contoh: <code className="bg-surface-muted px-1.5 py-0.5 rounded text-primary">https://g.page/r/.../review</code> atau Place ID: <code className="bg-surface-muted px-1.5 py-0.5 rounded text-primary">ChIJ...</code>
             </span>
           )}
         </div>
@@ -74,7 +74,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
           <Label required>Nama Tempat / Usaha</Label>
-          <span className="text-[10px] text-secondary">
+          <span className="text-[10px] font-mono text-secondary">
             {config.businessName.length}/60
           </span>
         </div>
@@ -82,7 +82,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
           value={config.businessName}
           maxLength={60}
           onChange={(e) => onChange({ businessName: e.target.value })}
-          placeholder="Contoh: Kopi Sangkara"
+          placeholder="Contoh: Nusantara Artisan Bistro"
         />
       </div>
 
@@ -93,7 +93,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
           value={config.tagline}
           maxLength={80}
           onChange={(e) => onChange({ tagline: e.target.value })}
-          placeholder="Review Usaha Kami di Google"
+          placeholder="Beri Ulasan Pengalaman Anda di Google"
         />
       </div>
 
@@ -109,38 +109,38 @@ export function CardForm({ config, onChange }: CardFormProps) {
       </div>
 
       {/* Quick Toggles */}
-      <div className="pt-2 border-t border-border space-y-3">
-        <span className="text-xs font-bold text-secondary uppercase tracking-wider block">
+      <div className="pt-2 border-t border-border space-y-2.5">
+        <span className="text-[11px] font-mono font-semibold text-secondary uppercase tracking-wider block">
           Opsi Tampilan Cetak
         </span>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-          <label className="flex items-center gap-2.5 p-3 rounded-2xl bg-surface border border-border hover:border-secondary/40 cursor-pointer text-xs font-medium text-primary select-none">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <label className="flex items-center gap-2.5 p-3 rounded-xl bg-surface border border-border hover:border-border-hover cursor-pointer text-xs font-medium text-primary select-none transition-colors min-h-[44px]">
             <input
               type="checkbox"
               checked={config.showRatingStars}
               onChange={(e) => onChange({ showRatingStars: e.target.checked })}
-              className="w-4 h-4 rounded text-accent bg-surface border-border focus:ring-accent accent-accent cursor-pointer"
+              className="w-4 h-4 rounded text-primary bg-surface border-border focus:ring-primary accent-primary cursor-pointer"
             />
             <span>5 Bintang Emas</span>
           </label>
 
-          <label className="flex items-center gap-2.5 p-3 rounded-2xl bg-surface border border-border hover:border-secondary/40 cursor-pointer text-xs font-medium text-primary select-none">
+          <label className="flex items-center gap-2.5 p-3 rounded-xl bg-surface border border-border hover:border-border-hover cursor-pointer text-xs font-medium text-primary select-none transition-colors min-h-[44px]">
             <input
               type="checkbox"
               checked={config.showNfcIcon}
               onChange={(e) => onChange({ showNfcIcon: e.target.checked })}
-              className="w-4 h-4 rounded text-accent bg-surface border-border focus:ring-accent accent-accent cursor-pointer"
+              className="w-4 h-4 rounded text-primary bg-surface border-border focus:ring-primary accent-primary cursor-pointer"
             />
             <span>Ikon Tap NFC</span>
           </label>
 
-          <label className="flex items-center gap-2.5 p-3 rounded-2xl bg-surface border border-border hover:border-secondary/40 cursor-pointer text-xs font-medium text-primary select-none">
+          <label className="flex items-center gap-2.5 p-3 rounded-xl bg-surface border border-border hover:border-border-hover cursor-pointer text-xs font-medium text-primary select-none transition-colors min-h-[44px]">
             <input
               type="checkbox"
               checked={config.includeBleedMarks}
               onChange={(e) => onChange({ includeBleedMarks: e.target.checked })}
-              className="w-4 h-4 rounded text-accent bg-surface border-border focus:ring-accent accent-accent cursor-pointer"
+              className="w-4 h-4 rounded text-primary bg-surface border-border focus:ring-primary accent-primary cursor-pointer"
             />
             <span>Garis Potong (Bleed)</span>
           </label>

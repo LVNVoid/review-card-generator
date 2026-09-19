@@ -9,16 +9,20 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", disabled, children, ...props }, ref) => {
     const variantStyles = {
-      primary: "bg-accent text-primary hover:bg-accent-hover active:scale-98 shadow-sm",
-      secondary: "bg-surface-muted text-primary hover:bg-border active:scale-98 border border-border",
-      outline: "bg-transparent border border-border text-primary hover:bg-surface-muted hover:border-secondary active:scale-98",
-      ghost: "bg-transparent text-secondary hover:text-primary hover:bg-surface-muted active:scale-98",
+      primary:
+        "bg-accent text-canvas hover:bg-accent-hover active:scale-[0.99] border border-transparent font-semibold shadow-sm",
+      secondary:
+        "bg-surface-muted text-primary hover:bg-surface border border-border hover:border-border-hover active:scale-[0.99]",
+      outline:
+        "bg-transparent border border-border text-primary hover:bg-surface-muted hover:border-border-hover active:scale-[0.99]",
+      ghost:
+        "bg-transparent text-secondary hover:text-primary hover:bg-surface-muted active:scale-[0.99]",
     };
 
     const sizeStyles = {
-      sm: "h-9 px-3 text-xs rounded-xl",
+      sm: "h-9 px-3 text-xs rounded-lg",
       md: "h-11 px-4 text-sm font-medium rounded-xl",
-      lg: "h-12 px-6 text-base font-medium rounded-2xl",
+      lg: "h-12 px-6 text-sm font-medium rounded-xl",
     };
 
     return (
@@ -27,7 +31,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         className={cn(
           "inline-flex items-center justify-center gap-2 font-sans transition-all cursor-pointer select-none",
-          "disabled:opacity-50 disabled:pointer-events-none",
+          "disabled:opacity-40 disabled:pointer-events-none",
           variantStyles[variant],
           sizeStyles[size],
           className

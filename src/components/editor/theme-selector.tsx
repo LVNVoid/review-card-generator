@@ -21,7 +21,7 @@ export function ThemeSelector({ selectedTheme, onSelectTheme }: ThemeSelectorPro
 
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
         {themeList.map((theme) => {
           const isSelected = selectedTheme === theme.id;
           const IconComponent = icons[theme.id];
@@ -32,19 +32,19 @@ export function ThemeSelector({ selectedTheme, onSelectTheme }: ThemeSelectorPro
               type="button"
               onClick={() => onSelectTheme(theme.id)}
               className={cn(
-                "flex flex-col items-start p-3.5 rounded-2xl border text-left transition-all cursor-pointer min-h-[44px]",
+                "flex flex-col items-start p-3 rounded-xl border text-left transition-all cursor-pointer min-h-[48px]",
                 isSelected
-                  ? "bg-accent-subtle border-accent shadow-sm"
-                  : "bg-surface border-border hover:border-secondary/40 hover:bg-surface-muted"
+                  ? "bg-surface-muted border-primary shadow-sm"
+                  : "bg-surface border-border hover:border-border-hover hover:bg-surface-muted/50"
               )}
             >
-              <div className="flex items-center gap-2 mb-1.5 w-full">
-                <IconComponent className="w-4 h-4 text-accent shrink-0" />
-                <span className="text-xs font-bold text-primary truncate">
+              <div className="flex items-center gap-1.5 mb-1 w-full">
+                <IconComponent className="w-3.5 h-3.5 text-primary shrink-0" />
+                <span className="text-xs font-semibold text-primary truncate">
                   {theme.name}
                 </span>
               </div>
-              <span className="text-[10px] font-medium text-accent mb-1">
+              <span className="text-[10px] font-mono text-secondary mb-1">
                 {theme.tag}
               </span>
               <p className="text-[11px] text-secondary leading-snug font-normal">

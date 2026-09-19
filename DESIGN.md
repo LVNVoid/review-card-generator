@@ -1,47 +1,48 @@
 ---
 version: alpha
-name: Review Card Generator Design System
-description: Design system for Google Review QR Card Generator workbench and print templates
+name: Review Card Generator Vercel Geist
+description: Vercel Geist design system for Google Review QR Card Generator workbench with monochrome minimalism, precision borders, and high mobile ergonomics
 colors:
-  primary: "#F9FAFB"
-  secondary: "#9CA3AF"
-  neutral: "#0B0F19"
-  surface: "#111827"
-  surface-muted: "#1F2937"
-  border: "#374151"
-  accent: "#2563EB"
-  accent-hover: "#1D4ED8"
-  accent-subtle: "#1E3A8A"
+  primary: "#EDEDED"
+  secondary: "#888888"
+  neutral: "#000000"
+  surface: "#0A0A0A"
+  surface-muted: "#171717"
+  border: "#262626"
+  accent: "#FFFFFF"
+  accent-hover: "#E0E0E0"
+  accent-subtle: "#1F1F1F"
+  vercel-blue: "#0070F3"
   google-blue: "#1A73E8"
   google-red: "#EA4335"
   google-yellow: "#FBBC04"
   google-green: "#34A853"
   card-white: "#FFFFFF"
-  card-dark: "#121214"
+  card-dark: "#111111"
   card-border-light: "#E5E7EB"
-  card-border-dark: "#27272A"
+  card-border-dark: "#262626"
 typography:
   h1:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 2.25rem
-    fontWeight: 800
-    lineHeight: 1.2
-    letterSpacing: "-0.02em"
-  h2:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 1.5rem
+    fontFamily: Geist Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif
+    fontSize: 2rem
     fontWeight: 700
-    lineHeight: 1.25
-    letterSpacing: "-0.01em"
+    lineHeight: 1.2
+    letterSpacing: "-0.03em"
+  h2:
+    fontFamily: Geist Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif
+    fontSize: 1.25rem
+    fontWeight: 600
+    lineHeight: 1.3
+    letterSpacing: "-0.02em"
   body-md:
-    fontFamily: Plus Jakarta Sans
+    fontFamily: Geist Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif
     fontSize: 0.875rem
     lineHeight: 1.5
 ---
 
-# Review Card Generator Design System
+# Review Card Generator Vercel Geist Design System
 
 ## Core Aesthetic Principles
-1. **Precision WYSIWYG**: Live preview mencerminkan kartu fisik 100% (skala proporsional milimeter, margin cetak, garis panduan potong).
-2. **Zero Hardcoded Colors**: Seluruh komponen UI workbench maupun template kartu mengonsumsi token CSS variables (`--color-*`).
-3. **High-DPI Contrast**: Komponen template kartu dirancang dengan kontras tajam (WCAG AAA) agar kode QR dapat dipindai seketika oleh sensor kamera smartphone dalam berbagai kondisi pencahayaan.
+1. **Geist Minimalism**: Monokrom pekat (OLED pitch black `#000000`, card `#0A0A0A`, garis tipis presisi 1px `#262626`).
+2. **Mobile Ergonomics**: Navigasi ramah jempol, touch targets minimal 44px, sticky floating preview drawer/toggle di mobile, dan dual-column sticky workbench di desktop & tablet.
+3. **Zero Hardcoded Colors**: Seluruh token warna bersumber dari CSS variables `:root` di `globals.css`.

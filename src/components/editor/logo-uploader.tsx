@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Upload, X, Image as ImageIcon } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface LogoUploaderProps {
@@ -16,9 +16,8 @@ export function LogoUploader({ logoDataUrl, onLogoChange }: LogoUploaderProps) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate size (max 2MB)
     if (file.size > 2 * 1024 * 1024) {
-      alert("Ukuran logo maksimal 2MB");
+      alert("Ukuran file logo maksimal 2MB");
       return;
     }
 
@@ -48,8 +47,8 @@ export function LogoUploader({ logoDataUrl, onLogoChange }: LogoUploaderProps) {
       />
 
       {logoDataUrl ? (
-        <div className="flex items-center gap-3 p-3 rounded-2xl bg-surface border border-border">
-          <div className="w-12 h-12 rounded-xl bg-surface-muted border border-border flex items-center justify-center overflow-hidden shrink-0">
+        <div className="flex items-center gap-3 p-3 rounded-xl bg-surface border border-border">
+          <div className="w-11 h-11 rounded-lg bg-surface-muted border border-border flex items-center justify-center overflow-hidden shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={logoDataUrl}
@@ -58,11 +57,11 @@ export function LogoUploader({ logoDataUrl, onLogoChange }: LogoUploaderProps) {
             />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-bold text-primary block truncate">
-              Logo Toko Terpasang
+            <span className="text-xs font-semibold text-primary block truncate">
+              Logo Toko Tersemat
             </span>
-            <span className="text-[11px] text-secondary block">
-              Ditampilkan otomatis di tengah QR Code
+            <span className="text-[11px] text-secondary block font-mono">
+              Otomatis di tengah QR Code
             </span>
           </div>
           <Button
@@ -80,11 +79,11 @@ export function LogoUploader({ logoDataUrl, onLogoChange }: LogoUploaderProps) {
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="w-full flex items-center justify-center gap-2.5 p-4 rounded-2xl border border-dashed border-border hover:border-accent bg-surface/50 hover:bg-surface-muted transition-all cursor-pointer text-secondary hover:text-primary min-h-[48px]"
+          className="w-full flex items-center justify-center gap-2 p-3.5 rounded-xl border border-dashed border-border hover:border-border-hover bg-surface/50 hover:bg-surface-muted/50 transition-all cursor-pointer text-secondary hover:text-primary min-h-[48px]"
         >
-          <Upload className="w-4 h-4 text-accent" />
+          <Upload className="w-4 h-4 text-primary" />
           <span className="text-xs font-medium">
-            Unggah Logo Usaha di Tengah QR (PNG / SVG / JPG, maks 2MB)
+            Unggah Logo Tengah QR (PNG / SVG / JPG, maks 2MB)
           </span>
         </button>
       )}
