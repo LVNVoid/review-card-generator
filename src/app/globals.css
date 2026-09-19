@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: var(--color-canvas);
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-border: var(--color-border);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-subtle: var(--color-accent-subtle);
+
+  --color-google-blue: var(--color-google-blue);
+  --color-google-red: var(--color-google-red);
+  --color-google-yellow: var(--color-google-yellow);
+  --color-google-green: var(--color-google-green);
+
+  --color-card-white: var(--color-card-white);
+  --color-card-dark: var(--color-card-dark);
+  --color-card-border-light: var(--color-card-border-light);
+  --color-card-border-dark: var(--color-card-border-dark);
+}
+
+:root {
+  --color-canvas: #0B0F19;
+  --color-surface: #111827;
+  --color-surface-muted: #1F2937;
+  --color-border: #374151;
+  --color-primary: #F9FAFB;
+  --color-secondary: #9CA3AF;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-subtle: rgba(37, 99, 235, 0.15);
+
+  --color-google-blue: #1A73E8;
+  --color-google-red: #EA4335;
+  --color-google-yellow: #FBBC04;
+  --color-google-green: #34A853;
+
+  --color-card-white: #FFFFFF;
+  --color-card-dark: #121214;
+  --color-card-border-light: #E5E7EB;
+  --color-card-border-dark: #27272A;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Print Specific Utility */
+@media print {
+  body {
+    background: transparent !important;
+  }
+}
