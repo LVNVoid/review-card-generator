@@ -21,7 +21,7 @@ export function ThemeSelector({ selectedTheme, onSelectTheme }: ThemeSelectorPro
 
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {themeList.map((theme) => {
           const isSelected = selectedTheme === theme.id;
           const IconComponent = icons[theme.id];
@@ -32,22 +32,32 @@ export function ThemeSelector({ selectedTheme, onSelectTheme }: ThemeSelectorPro
               type="button"
               onClick={() => onSelectTheme(theme.id)}
               className={cn(
-                "flex flex-col items-start p-3 rounded-xl border text-left transition-all cursor-pointer min-h-[48px]",
+                "flex flex-col items-start p-3.5 sm:p-4 rounded-xl border text-left transition-all cursor-pointer min-h-[56px]",
                 isSelected
-                  ? "bg-surface-muted border-primary shadow-sm"
-                  : "bg-surface border-border hover:border-border-hover hover:bg-surface-muted/50"
+                  ? "bg-surface-muted border-google-blue ring-1 ring-google-blue/30 shadow-sm"
+                  : "bg-surface border-border hover:border-border-hover hover:bg-surface-muted/40"
               )}
             >
-              <div className="flex items-center gap-1.5 mb-1 w-full">
-                <IconComponent className="w-3.5 h-3.5 text-primary shrink-0" />
+              <div className="flex items-center gap-2 mb-1.5 w-full">
+                <IconComponent
+                  className={cn(
+                    "w-4 h-4 shrink-0",
+                    isSelected ? "text-google-blue" : "text-secondary"
+                  )}
+                />
                 <span className="text-xs font-semibold text-primary truncate">
                   {theme.name}
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-secondary mb-1">
+              <span className={cn(
+                "text-[10px] font-mono mb-1 px-1.5 py-0.2 rounded border",
+                isSelected
+                  ? "bg-google-blue/10 border-google-blue/30 text-google-blue"
+                  : "bg-surface border-border text-secondary"
+              )}>
                 {theme.tag}
               </span>
-              <p className="text-[11px] text-secondary leading-snug font-normal">
+              <p className="text-[11px] text-secondary leading-relaxed font-normal">
                 {theme.description}
               </p>
             </button>

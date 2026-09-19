@@ -61,7 +61,7 @@ export function ExportToolbar({ config, cardRef }: ExportToolbarProps) {
     <div className="w-full flex flex-col sm:flex-row items-center gap-3 pt-4 border-t border-border">
       <Button
         type="button"
-        variant="primary"
+        variant="google"
         size="lg"
         onClick={handleExportPdf}
         disabled={isExportingPdf || isExportingPng}

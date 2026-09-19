@@ -14,7 +14,7 @@ interface CardCanvasProps {
 export function CardCanvas({ config, cardRef }: CardCanvasProps) {
   const sizeConfig = CARD_SIZES[config.sizeId];
 
-  // Base canvas pixel dimensions (scaling 4.5px per mm for crisp on-screen preview)
+  // Base canvas pixel dimensions (scaling 4.8px per mm for crisp on-screen preview)
   const pxPerMm = 4.8;
   const widthPx = Math.round(sizeConfig.widthMm * pxPerMm);
   const heightPx = Math.round(sizeConfig.heightMm * pxPerMm);
@@ -32,21 +32,21 @@ export function CardCanvas({ config, cardRef }: CardCanvasProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-8">
+    <div className="flex flex-col items-center justify-center w-full h-full p-6 sm:p-10 lg:p-12">
       {/* Physical Dimension Indicators */}
-      <div className="flex items-center justify-between w-full max-w-[480px] mb-3 text-xs font-mono text-secondary">
-        <span className="flex items-center gap-1.5">
+      <div className="flex items-center justify-between w-full max-w-[500px] mb-4 text-xs font-mono text-secondary">
+        <span className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-google-green animate-pulse" />
-          <span>PREVIEW SKALA 1:1</span>
+          <span className="text-primary font-medium">SKALA CETAK AKTUAL</span>
         </span>
-        <span className="bg-surface-muted px-2.5 py-1 rounded-full border border-border">
+        <span className="bg-surface px-3 py-1 rounded-full border border-border text-secondary">
           {sizeConfig.widthMm} × {sizeConfig.heightMm} mm
         </span>
       </div>
 
-      {/* Live Card Container */}
+      {/* Live Card Container Studio Stage */}
       <div
-        className="relative flex items-center justify-center p-3 rounded-3xl bg-surface/80 border border-border/80 shadow-2xl backdrop-blur max-w-full overflow-auto"
+        className="relative flex items-center justify-center p-4 sm:p-6 rounded-3xl bg-surface/60 border border-border/70 shadow-2xl backdrop-blur max-w-full overflow-auto"
       >
         <div
           ref={cardRef}
@@ -62,8 +62,8 @@ export function CardCanvas({ config, cardRef }: CardCanvasProps) {
       </div>
 
       {/* Print Notes Guide */}
-      <p className="mt-4 text-center text-xs text-secondary max-w-sm">
-        💡 Format PDF diekspor dalam ukuran fisik presisi (skala milimeter). Siap dikirim langsung ke percetakan kartu PVC atau akrilik.
+      <p className="mt-5 text-center text-xs text-secondary max-w-md leading-relaxed">
+        Format PDF diekspor dalam rasio fisik 1:1 vektor tajam (300 DPI), siap dicetak langsung di bahan PVC, akrilik standee, atau stiker etalase.
       </p>
     </div>
   );
