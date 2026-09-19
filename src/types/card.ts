@@ -99,7 +99,7 @@ export const CARD_THEMES: Record<CardThemeId, CardThemeConfig> = {
 };
 
 export const CardConfigSchema = z.object({
-  businessName: z.string().min(1, "Nama tempat usaha wajib diisi").max(60),
+  businessName: z.string().max(60).default(""),
   tagline: z.string().max(80).default("Review Usaha Kami di Google"),
   callToAction: z.string().max(100).default("Pindai kode QR untuk memberikan rating & ulasan bintang 5"),
   googleReviewUrl: z.string().url("Format URL review tidak valid"),

@@ -67,13 +67,26 @@ export function MinimalistCard({ config }: TemplateProps) {
                 )}
               </div>
 
-              <h2 className="text-sm font-black text-zinc-900 leading-snug line-clamp-2 pt-0.5 font-google-sans tracking-tight">
-                {config.businessName || "Nama Tempat Usaha"}
-              </h2>
+              {config.isDynamicMode ? (
+                <div className="space-y-0.5 pt-0.5">
+                  <h2 className="text-xs sm:text-[13px] font-black text-zinc-900 leading-snug font-google-sans tracking-tight">
+                    {config.tagline || "Beri Ulasan Pengalaman Anda di Google"}
+                  </h2>
+                  <p className="text-[9.5px] text-zinc-600 font-medium font-google-sans-text leading-tight">
+                    Bagikan rating bintang 5 & ulasan Anda
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <h2 className="text-sm font-black text-zinc-900 leading-snug line-clamp-2 pt-0.5 font-google-sans tracking-tight">
+                    {config.businessName || "Nama Tempat Usaha"}
+                  </h2>
 
-              <p className="text-[10px] text-zinc-600 font-medium leading-tight line-clamp-1 font-google-sans-text">
-                {config.tagline}
-              </p>
+                  <p className="text-[10px] text-zinc-600 font-medium leading-tight line-clamp-1 font-google-sans-text">
+                    {config.tagline}
+                  </p>
+                </>
+              )}
             </div>
 
             <div className="space-y-1.5 pt-1 border-t border-zinc-200">
@@ -125,18 +138,36 @@ export function MinimalistCard({ config }: TemplateProps) {
               )}
             </div>
 
-            <h2
-              className={cn(
-                "font-black text-zinc-900 leading-tight px-1 font-google-sans tracking-tight",
-                isSquare ? "text-xs line-clamp-1" : "text-sm sm:text-base line-clamp-2"
-              )}
-            >
-              {config.businessName || "Nama Tempat Usaha"}
-            </h2>
+            {config.isDynamicMode ? (
+              <div className="space-y-0.5 px-1 pt-0.5">
+                <h2
+                  className={cn(
+                    "font-black text-zinc-900 leading-tight font-google-sans tracking-tight",
+                    isSquare ? "text-xs line-clamp-2" : "text-sm sm:text-base line-clamp-2"
+                  )}
+                >
+                  {config.tagline || "Beri Ulasan Pengalaman Anda di Google"}
+                </h2>
+                <p className="text-[10px] text-zinc-600 font-medium line-clamp-1 font-google-sans-text">
+                  Bagikan rating bintang 5 & ulasan Anda
+                </p>
+              </div>
+            ) : (
+              <>
+                <h2
+                  className={cn(
+                    "font-black text-zinc-900 leading-tight px-1 font-google-sans tracking-tight",
+                    isSquare ? "text-xs line-clamp-1" : "text-sm sm:text-base line-clamp-2"
+                  )}
+                >
+                  {config.businessName || "Nama Tempat Usaha"}
+                </h2>
 
-            <p className="text-[10px] sm:text-[11px] text-zinc-600 font-medium px-2 line-clamp-1 font-google-sans-text">
-              {config.tagline}
-            </p>
+                <p className="text-[10px] sm:text-[11px] text-zinc-600 font-medium px-2 line-clamp-1 font-google-sans-text">
+                  {config.tagline}
+                </p>
+              </>
+            )}
 
             {config.showRatingStars && (
               <div className="pt-0.5 flex items-center justify-center gap-1.5">

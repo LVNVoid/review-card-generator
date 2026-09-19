@@ -51,9 +51,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
       onChange({
         isDynamicMode: true,
         cardId: newId,
-        businessName: "Nama Bisnis Anda",
+        businessName: "",
         tagline: "Beri Ulasan Pengalaman Anda di Google",
-        callToAction: "Pindai kode QR untuk aktivasi & ulasan bintang 5",
+        callToAction: "Pindai kode QR untuk memberikan rating & ulasan bintang 5",
         googleReviewUrl: `${origin}/r/${newId}`,
       });
     } else {
@@ -216,16 +216,15 @@ export function CardForm({ config, onChange }: CardFormProps) {
             </p>
           </div>
 
-          {/* Customizable Display Name for Blank Print */}
-          <div className="space-y-2 pt-2 border-t border-border">
-            <Label>Teks Judul Kartu (Placeholder Cetak)</Label>
-            <Input
-              value={config.businessName}
-              maxLength={60}
-              onChange={(e) => onChange({ businessName: e.target.value })}
-              placeholder="Contoh: Nama Bisnis Anda / Google Review Card"
-              className="bg-canvas"
-            />
+          {/* Universal Store Badge */}
+          <div className="p-3.5 rounded-xl bg-canvas border border-border space-y-1.5 pt-3">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-google-yellow font-google-sans uppercase tracking-wider">
+              <Sparkles size={14} />
+              <span>Kartu Universal Siap Jual</span>
+            </div>
+            <p className="text-[11px] text-secondary font-google-sans-text leading-relaxed">
+              Kartu ini dicetak <strong>tanpa nama toko</strong> agar siap Anda jual atau distribusikan langsung ke toko atau resto mana pun. Toko pembeli akan mengisikan nama tokonya sendiri saat aktivasi kartu via scan QR.
+            </p>
           </div>
         </div>
       ) : (
