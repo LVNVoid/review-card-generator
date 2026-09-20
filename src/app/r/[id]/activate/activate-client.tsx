@@ -246,23 +246,23 @@ export function ActivateClient({
 
           {/* Review Link Field */}
           <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
               <label className="block text-xs font-bold text-primary font-google-sans uppercase tracking-wider">
                 2. Link Google Review / Maps
               </label>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 self-start sm:self-auto">
                 <button
                   type="button"
                   onClick={() => setShowLocationModal(true)}
-                  className="text-xs font-bold font-google-sans text-google-blue hover:underline inline-flex items-center gap-1 cursor-pointer bg-google-blue/10 px-2 py-0.5 rounded-lg border border-google-blue/20 transition-colors hover:bg-google-blue/15"
+                  className="text-xs font-bold font-google-sans text-google-blue hover:underline inline-flex items-center gap-1.5 cursor-pointer bg-google-blue/10 px-2.5 py-1 rounded-lg border border-google-blue/20 transition-colors hover:bg-google-blue/15 min-h-[32px]"
                 >
-                  <Search size={11} />
+                  <Search size={12} />
                   <span>Bantu Cari Lokasi</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowHelper(!showHelper)}
-                  className="text-[11px] text-secondary hover:text-primary inline-flex items-center gap-1 cursor-pointer"
+                  className="text-[11px] text-secondary hover:text-primary inline-flex items-center gap-1 cursor-pointer min-h-[32px] px-1"
                 >
                   <HelpCircle size={12} />
                   <span>Panduan</span>

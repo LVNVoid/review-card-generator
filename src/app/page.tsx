@@ -37,7 +37,7 @@ export default function WorkbenchPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-canvas text-primary pb-44 md:pb-16">
+    <div className="min-h-screen flex flex-col bg-canvas text-primary pb-28 md:pb-16">
       {/* Google 4-Color Ambient Top Stripe */}
       <div className="h-[2.5px] w-full grid grid-cols-4 sticky top-0 z-40">
         <div className="bg-google-blue h-full" />
@@ -47,15 +47,15 @@ export default function WorkbenchPage() {
       </div>
 
       {/* Top Navbar Header with Google Identity */}
-      <header className="h-16 border-b border-border bg-canvas/90 backdrop-blur sticky top-[2.5px] z-30 flex items-center px-4 sm:px-6 lg:px-8 justify-between">
-        <div className="flex items-center gap-3.5">
-          <div className="w-9 h-9 rounded-xl bg-surface border border-border flex items-center justify-center shadow-sm shrink-0">
-            <GoogleLogo size={22} />
+      <header className="h-16 border-b border-border bg-canvas/90 backdrop-blur sticky top-[2.5px] z-30 flex items-center px-3.5 sm:px-6 lg:px-8 justify-between">
+        <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-surface border border-border flex items-center justify-center shadow-sm shrink-0">
+            <GoogleLogo size={20} />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="text-sm font-semibold tracking-tight text-primary">
-                Google Review Card Generator
+              <h1 className="text-xs sm:text-sm font-semibold tracking-tight text-primary truncate">
+                Google Review Card
               </h1>
               <span className="hidden sm:inline-flex text-[10px] font-mono text-google-green bg-google-green/10 px-2 py-0.5 rounded border border-google-green/30 font-medium">
                 300 DPI CETAK
@@ -68,11 +68,14 @@ export default function WorkbenchPage() {
         </div>
 
         {/* Mobile Tab Segmented Switcher */}
-        <div className="flex md:hidden items-center p-1 rounded-xl bg-surface border border-border">
+        <div className="flex md:hidden items-center p-1 rounded-xl bg-surface border border-border shrink-0">
           <button
             type="button"
-            onClick={() => setActiveMobileTab("editor")}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium transition-all min-h-[44px] ${
+            onClick={() => {
+              setActiveMobileTab("editor");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all min-h-[38px] cursor-pointer ${
               activeMobileTab === "editor"
                 ? "bg-google-blue text-white shadow-sm font-semibold"
                 : "text-secondary hover:text-primary"
@@ -83,8 +86,11 @@ export default function WorkbenchPage() {
           </button>
           <button
             type="button"
-            onClick={() => setActiveMobileTab("preview")}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium transition-all min-h-[44px] ${
+            onClick={() => {
+              setActiveMobileTab("preview");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all min-h-[38px] cursor-pointer ${
               activeMobileTab === "preview"
                 ? "bg-google-blue text-white shadow-sm font-semibold"
                 : "text-secondary hover:text-primary"
@@ -223,25 +229,51 @@ export default function WorkbenchPage() {
         </div>
       </main>
 
-      {/* Mobile Sticky Floating Quick Dock */}
-      {activeMobileTab === "editor" && (
-        <div className="md:hidden fixed bottom-4 inset-x-4 z-40 pb-[env(safe-area-inset-bottom)]">
-          <div className="mx-auto max-w-sm bg-surface/95 backdrop-blur-xl rounded-2xl border border-border p-3 flex items-center justify-between gap-3 shadow-2xl">
-            <div className="flex items-center gap-2.5 pl-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-google-green animate-pulse" />
-              <div className="flex flex-col">
-                <span className="text-xs font-semibold text-primary">Kartu Siap</span>
-                <span className="text-[10px] font-mono text-secondary">{config.sizeId}</span>
+      {/* Mobile Fixed Bottom Dock */}
+      {activeMobileTab === "editor" ? (
+        <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-surface/95 backdrop-blur-xl border-t border-border px-4 py-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-2xl">
+          <div className="max-w-md mx-auto flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="w-2.5 h-2.5 rounded-full bg-google-green animate-pulse shrink-0" />
+              <div className="flex flex-col min-w-0">
+                <span className="text-xs font-semibold text-primary truncate">
+                  {config.businessName || "Review Card"}
+                </span>
+                <span className="text-[10px] font-mono text-secondary truncate">
+                  {config.sizeId} • 300 DPI
+                </span>
               </div>
             </div>
             <button
               type="button"
-              onClick={() => setActiveMobileTab("preview")}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-google-blue text-white text-xs font-semibold shadow-md active:scale-95 transition-all min-h-[44px]"
+              onClick={() => {
+                setActiveMobileTab("preview");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-google-blue text-white text-xs font-semibold shadow-md active:scale-95 transition-all min-h-[44px] shrink-0 cursor-pointer"
             >
               <Eye className="w-4 h-4" />
-              <span>Lihat & Unduh</span>
+              <span>Preview & Unduh</span>
             </button>
+          </div>
+        </div>
+      ) : (
+        <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-surface/95 backdrop-blur-xl border-t border-border px-4 py-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-2xl">
+          <div className="max-w-md mx-auto flex items-center justify-between gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveMobileTab("editor");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface border border-border text-primary text-xs font-semibold shadow-xs active:scale-95 transition-all min-h-[44px] cursor-pointer"
+            >
+              <Sliders className="w-4 h-4 text-google-blue" />
+              <span>Kembali ke Editor</span>
+            </button>
+            <span className="text-[10px] font-mono text-secondary">
+              Skala Cetak 1:1
+            </span>
           </div>
         </div>
       )}
