@@ -17,8 +17,10 @@ import {
   Share2,
   Copy,
   Sparkles,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { expandAndConvertReviewUrlAction } from "@/actions/card-actions";
 
 interface LocationFinderModalProps {
   isOpen: boolean;
@@ -36,12 +38,40 @@ export function LocationFinderModal({
   const [query, setQuery] = React.useState(initialQuery);
   const [pastedUrl, setPastedUrl] = React.useState("");
   const [clipboardError, setClipboardError] = React.useState<string | null>(null);
+  const [isResolvingServer, setIsResolvingServer] = React.useState(false);
+
+  const processUrlConversion = async (rawUrl: string) => {
+    const trimmed = rawUrl.trim();
+    if (!trimmed) return;
+
+    if (
+      trimmed.includes("maps.app.goo.gl") ||
+      trimmed.includes("goo.gl/") ||
+      (trimmed.includes("g.page/") && !trimmed.includes("/review"))
+    ) {
+      setIsResolvingServer(true);
+      try {
+        const res = await expandAndConvertReviewUrlAction(trimmed);
+        if (res.success && res.directUrl) {
+          setPastedUrl(res.directUrl);
+          if (res.businessName && (!query || query === "Nusantara Artisan Bistro")) {
+            setQuery(res.businessName);
+          }
+        }
+      } catch (err) {
+        console.warn("Auto convert failed:", err);
+      } finally {
+        setIsResolvingServer(false);
+      }
+    }
+  };
 
   React.useEffect(() => {
     if (isOpen) {
       setQuery(initialQuery);
       setPastedUrl("");
       setClipboardError(null);
+      setIsResolvingServer(false);
     }
   }, [isOpen, initialQuery]);
 
@@ -80,7 +110,9 @@ export function LocationFinderModal({
         setClipboardError("Clipboard kosong. Salin tautan tempat di Google Maps terlebih dahulu.");
         return;
       }
-      setPastedUrl(text.trim());
+      const trimmed = text.trim();
+      setPastedUrl(trimmed);
+      await processUrlConversion(trimmed);
     } catch {
       setClipboardError("Izin clipboard ditolak. Tempel link secara manual pada kolom input.");
     }
@@ -227,11 +259,20 @@ export function LocationFinderModal({
               placeholder="Tempel link ulasan Google Maps di sini..."
               value={pastedUrl}
               onChange={(e) => {
-                setPastedUrl(e.target.value);
+                const val = e.target.value;
+                setPastedUrl(val);
                 setClipboardError(null);
+                processUrlConversion(val);
               }}
               className="bg-canvas font-mono text-xs"
             />
+
+            {isResolvingServer && (
+              <div className="flex items-center gap-1.5 text-xs text-google-blue font-medium py-1 animate-pulse">
+                <Loader2 size={13} className="animate-spin shrink-0" />
+                <span>Mengonversi shortlink ke link form ulasan langsung...</span>
+              </div>
+            )}
 
             {clipboardError && (
               <p className="text-[11px] text-google-yellow font-google-sans-text flex items-center gap-1">

@@ -20,8 +20,10 @@ import {
   RefreshCw,
   ExternalLink,
   Search,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { expandAndConvertReviewUrlAction } from "@/actions/card-actions";
 
 interface CardFormProps {
   config: CardConfig;
@@ -40,6 +42,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
   const [isGeneratingId, setIsGeneratingId] = React.useState(false);
   const [registeredInDb, setRegisteredInDb] = React.useState(false);
   const [isLocationModalOpen, setIsLocationModalOpen] = React.useState(false);
+  const [isConvertingUrl, setIsConvertingUrl] = React.useState(false);
 
   // Initialize dynamic mode with a card ID if enabled and none exists
   React.useEffect(() => {
@@ -102,6 +105,42 @@ export function CardForm({ config, onChange }: CardFormProps) {
     }
   };
 
+  const autoConvertShortlink = async (val: string) => {
+    const trimmed = val.trim();
+    if (
+      trimmed.includes("maps.app.goo.gl") ||
+      trimmed.includes("goo.gl/") ||
+      (trimmed.includes("g.page/") && !trimmed.includes("/review"))
+    ) {
+      setIsConvertingUrl(true);
+      try {
+        const res = await expandAndConvertReviewUrlAction(trimmed);
+        if (res.success && res.directUrl && res.directUrl !== trimmed) {
+          setUrlInput(res.directUrl);
+          const resolved = resolveReviewUrl(res.directUrl);
+          setUrlStatus({
+            isValid: resolved.isValid,
+            type: resolved.type,
+            isDirectReview: resolved.isDirectReview,
+            message: resolved.errorMessage,
+          });
+          onChange({
+            googleReviewUrl: res.directUrl,
+            placeId: resolved.type === "place_id" ? res.directUrl : undefined,
+            ...(res.businessName &&
+            (!config.businessName || config.businessName === "Nusantara Artisan Bistro")
+              ? { businessName: res.businessName }
+              : {}),
+          });
+        }
+      } catch (err) {
+        console.warn("Auto convert failed:", err);
+      } finally {
+        setIsConvertingUrl(false);
+      }
+    }
+  };
+
   const handleUrlChange = (value: string) => {
     setUrlInput(value);
     const resolved = resolveReviewUrl(value);
@@ -118,6 +157,8 @@ export function CardForm({ config, onChange }: CardFormProps) {
         placeId: resolved.type === "place_id" ? value.trim() : undefined,
       });
     }
+
+    autoConvertShortlink(value);
   };
 
   const handleLocationSelect = ({
@@ -269,7 +310,12 @@ export function CardForm({ config, onChange }: CardFormProps) {
             error={!urlStatus.isValid ? urlStatus.message : undefined}
           />
           <div className="flex items-center gap-1.5 text-[11px] pt-0.5">
-            {urlStatus.isValid ? (
+            {isConvertingUrl ? (
+              <span className="text-google-blue flex items-center gap-1 font-mono animate-pulse">
+                <Loader2 className="w-3.5 h-3.5 animate-spin shrink-0" />
+                Mengonversi shortlink ke form ulasan langsung...
+              </span>
+            ) : urlStatus.isValid ? (
               <span className="text-google-green flex items-center gap-1 font-mono">
                 <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                 {urlStatus.isDirectReview

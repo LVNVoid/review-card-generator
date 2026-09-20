@@ -118,6 +118,7 @@ export async function expandAndConvertReviewUrlAction(rawInput: string): Promise
   success: boolean;
   directUrl: string;
   isDirectReview: boolean;
+  businessName?: string;
   error?: string;
 }> {
   const trimmed = rawInput.trim();
@@ -154,18 +155,30 @@ export async function expandAndConvertReviewUrlAction(rawInput: string): Promise
 
       const location = response.headers.get("location");
       if (location) {
+        let businessName: string | undefined;
+        const placeMatch = location.match(/\/maps\/place\/([^/@]+)/);
+        if (placeMatch && placeMatch[1]) {
+          try {
+            businessName = decodeURIComponent(placeMatch[1].replace(/\+/g, " "));
+          } catch {
+            businessName = placeMatch[1].replace(/\+/g, " ");
+          }
+        }
+
         const expandedTransform = transformToDirectReviewUrl(location);
         if (expandedTransform.isDirectReview) {
           return {
             success: true,
             directUrl: expandedTransform.directUrl,
             isDirectReview: true,
+            businessName,
           };
         }
         return {
           success: true,
           directUrl: location,
           isDirectReview: false,
+          businessName,
         };
       }
     }

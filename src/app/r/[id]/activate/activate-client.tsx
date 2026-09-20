@@ -4,7 +4,7 @@ import * as React from "react";
 import { GoogleLogo, GoogleReviewStars } from "@/components/ui/google-icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { activateCardAction } from "@/actions/card-actions";
+import { activateCardAction, expandAndConvertReviewUrlAction } from "@/actions/card-actions";
 import { cn } from "@/lib/utils";
 import { LocationFinderModal } from "@/components/editor/location-finder-modal";
 import {
@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   Sparkles,
   Search,
+  Loader2,
 } from "lucide-react";
 
 interface ActivateClientProps {
@@ -39,6 +40,36 @@ export function ActivateClient({
   const [isSuccess, setIsSuccess] = React.useState(initialStatus === "ACTIVE");
   const [showHelper, setShowHelper] = React.useState(false);
   const [showLocationModal, setShowLocationModal] = React.useState(false);
+  const [isConvertingUrl, setIsConvertingUrl] = React.useState(false);
+
+  const autoConvertShortlink = async (val: string) => {
+    const trimmed = val.trim();
+    if (
+      trimmed.includes("maps.app.goo.gl") ||
+      trimmed.includes("goo.gl/") ||
+      (trimmed.includes("g.page/") && !trimmed.includes("/review"))
+    ) {
+      setIsConvertingUrl(true);
+      try {
+        const res = await expandAndConvertReviewUrlAction(trimmed);
+        if (res.success && res.directUrl && res.directUrl !== trimmed) {
+          setGoogleReviewUrl(res.directUrl);
+          if (res.businessName && !businessName.trim()) {
+            setBusinessName(res.businessName);
+          }
+        }
+      } catch (err) {
+        console.warn("Auto convert failed:", err);
+      } finally {
+        setIsConvertingUrl(false);
+      }
+    }
+  };
+
+  const handleReviewUrlChange = (val: string) => {
+    setGoogleReviewUrl(val);
+    autoConvertShortlink(val);
+  };
 
   const handleLocationSelect = (data: { businessName?: string; reviewUrl: string }) => {
     if (data.businessName && !businessName.trim()) {
@@ -241,18 +272,23 @@ export function ActivateClient({
 
             <Input
               value={googleReviewUrl}
-              onChange={(e) => setGoogleReviewUrl(e.target.value)}
+              onChange={(e) => handleReviewUrlChange(e.target.value)}
               placeholder="https://g.page/r/... atau https://maps.app.goo.gl/..."
               required
               className="bg-canvas font-mono text-xs"
             />
 
-            {googleReviewUrl && (
+            {isConvertingUrl ? (
+              <div className="flex items-center gap-1.5 text-[11px] text-google-blue font-mono pt-0.5 animate-pulse">
+                <Loader2 size={13} className="shrink-0 animate-spin" />
+                <span>Mengonversi shortlink ke format ulasan langsung Google...</span>
+              </div>
+            ) : googleReviewUrl ? (
               <div className="flex items-center gap-1.5 text-[11px] text-google-green font-google-sans-text pt-0.5">
                 <CheckCircle2 size={13} className="shrink-0 text-google-green" />
                 <span>Kartu fisik otomatis memunculkan pop-up form ulasan 5-bintang saat di-scan pelanggan.</span>
               </div>
-            )}
+            ) : null}
 
             {showHelper && (
               <div className="p-3.5 rounded-xl bg-canvas border border-border text-xs text-secondary space-y-2">
