@@ -48,7 +48,7 @@ export default function WorkbenchPage() {
           </div>
           <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="text-xs sm:text-sm font-semibold tracking-tight text-primary truncate">
+              <h1 className="text-sm sm:text-base font-bold tracking-tight text-primary font-google-sans">
                 Google Review Card
               </h1>
               <span className="hidden sm:inline-flex text-[10px] font-mono text-google-green bg-google-green/10 px-2 py-0.5 rounded border border-google-green/30 font-medium">
@@ -61,50 +61,17 @@ export default function WorkbenchPage() {
           </div>
         </div>
 
-        {/* Mobile Nav & Tab Switcher */}
-        <div className="flex md:hidden items-center gap-1.5 shrink-0">
+        {/* Mobile Action Controls (Spacious & Clean) */}
+        <div className="flex md:hidden items-center gap-2 shrink-0">
           <ThemeToggle />
 
           <Link
             href="/cards"
-            className="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-surface border border-border text-secondary hover:text-primary transition-colors cursor-pointer"
+            className="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-surface border border-border text-secondary hover:text-primary transition-colors cursor-pointer shadow-xs"
             title="Daftar Kartu QR"
           >
             <QrCode size={16} />
           </Link>
-
-          <div className="flex items-center p-1 rounded-full bg-surface border border-border shrink-0">
-            <button
-              type="button"
-              onClick={() => {
-                setActiveMobileTab("editor");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all min-h-[34px] cursor-pointer ${
-                activeMobileTab === "editor"
-                  ? "bg-google-blue text-white shadow-sm font-semibold"
-                  : "text-secondary hover:text-primary"
-              }`}
-            >
-              <Sliders className="w-3.5 h-3.5" />
-              <span>Editor</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setActiveMobileTab("preview");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all min-h-[34px] cursor-pointer ${
-                activeMobileTab === "preview"
-                  ? "bg-google-blue text-white shadow-sm font-semibold"
-                  : "text-secondary hover:text-primary"
-              }`}
-            >
-              <Eye className="w-3.5 h-3.5" />
-              <span>Preview</span>
-            </button>
-          </div>
         </div>
 
         {/* Desktop Quick Indicator */}
@@ -266,7 +233,7 @@ export default function WorkbenchPage() {
                 setActiveMobileTab("preview");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-google-blue text-white text-xs font-semibold shadow-md active:scale-95 transition-all min-h-[44px] shrink-0 cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-google-blue text-white text-xs font-semibold shadow-md active:scale-95 transition-all min-h-[44px] shrink-0 cursor-pointer"
             >
               <Eye className="w-4 h-4" />
               <span>Preview & Unduh</span>
@@ -282,7 +249,7 @@ export default function WorkbenchPage() {
                 setActiveMobileTab("editor");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface border border-border text-primary text-xs font-semibold shadow-xs active:scale-95 transition-all min-h-[44px] cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-border text-primary text-xs font-semibold shadow-xs active:scale-95 transition-all min-h-[44px] cursor-pointer"
             >
               <Sliders className="w-4 h-4 text-google-blue" />
               <span>Kembali ke Editor</span>
