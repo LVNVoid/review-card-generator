@@ -15,9 +15,14 @@ export default async function ActivatePage({
   const { id } = await params;
   const normalizedId = id.toUpperCase().trim();
 
-  const card = await prisma.card.findUnique({
-    where: { id: normalizedId },
-  });
+  let card = null;
+  try {
+    card = await prisma.card.findUnique({
+      where: { id: normalizedId },
+    });
+  } catch (error) {
+    console.error("Failed to query card for activation:", error);
+  }
 
   return (
     <ActivateClient

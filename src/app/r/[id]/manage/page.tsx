@@ -16,9 +16,14 @@ export default async function ManagePage({
   const { id } = await params;
   const normalizedId = id.toUpperCase().trim();
 
-  const card = await prisma.card.findUnique({
-    where: { id: normalizedId },
-  });
+  let card = null;
+  try {
+    card = await prisma.card.findUnique({
+      where: { id: normalizedId },
+    });
+  } catch (error) {
+    console.error("Failed to query card for manage page:", error);
+  }
 
   if (!card) {
     notFound();

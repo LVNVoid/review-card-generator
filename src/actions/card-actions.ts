@@ -39,6 +39,13 @@ export async function activateCardAction(
   const { id, businessName, googleReviewUrl, pin } = parseResult.data;
   const normalizedId = id.toUpperCase().trim();
 
+  if (!process.env.DATABASE_URL) {
+    return {
+      success: false,
+      error: "Koneksi database belum dikonfigurasi di server (DATABASE_URL missing). Harap atur environment variable di dashboard Vercel.",
+    };
+  }
+
   try {
     const existingCard = await prisma.card.findUnique({
       where: { id: normalizedId },

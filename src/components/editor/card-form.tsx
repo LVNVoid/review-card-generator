@@ -46,7 +46,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
 
   const handleModeSwitch = (isDynamic: boolean) => {
     if (isDynamic) {
-      const origin = typeof window !== "undefined" ? window.location.origin : "https://review-card-generator.vercel.app";
+      const origin = typeof window !== "undefined" ? window.location.origin : "https://review-card-generator-orcin.vercel.app";
       const newId = config.cardId || `G-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
       onChange({
         isDynamicMode: true,
@@ -72,7 +72,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
     setRegisteredInDb(false);
     try {
       const res = await createBlankCardAction();
-      const origin = typeof window !== "undefined" ? window.location.origin : "https://review-card-generator.vercel.app";
+      const origin = typeof window !== "undefined" ? window.location.origin : "https://review-card-generator-orcin.vercel.app";
       if (res.success && res.cardId) {
         onChange({
           cardId: res.cardId,
@@ -88,7 +88,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
       }
     } catch {
       const fallbackId = `G-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-      const origin = typeof window !== "undefined" ? window.location.origin : "https://review-card-generator.vercel.app";
+      const origin = typeof window !== "undefined" ? window.location.origin : "https://review-card-generator-orcin.vercel.app";
       onChange({
         cardId: fallbackId,
         googleReviewUrl: `${origin}/r/${fallbackId}`,
