@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CardConfig } from "@/types/card";
+import { CardConfig, CARD_SIZES } from "@/types/card";
 import { SizeSelector } from "@/components/editor/size-selector";
 import { ThemeSelector } from "@/components/editor/theme-selector";
 import { CardForm } from "@/components/editor/card-form";
@@ -183,26 +183,27 @@ export default function WorkbenchPage() {
             activeMobileTab === "editor" ? "hidden md:block" : "block"
           }`}
         >
-          <div className="bg-surface rounded-2xl sm:rounded-3xl border border-border p-4 sm:p-8 space-y-5 sm:space-y-6 shadow-2xl">
+          <div className="bg-surface rounded-2xl sm:rounded-3xl border border-border p-4 sm:p-7 space-y-4 sm:space-y-5 shadow-xl">
+            {/* Unified Clean Header */}
             <div className="flex items-center justify-between pb-3 border-b border-border">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 <Printer className="w-4 h-4 text-google-blue" />
-                <h2 className="text-xs font-semibold tracking-wider text-primary uppercase">
-                  Live Print Preview
+                <h2 className="text-xs font-bold tracking-wider text-primary uppercase font-google-sans">
+                  Live Preview
                 </h2>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono text-google-green bg-google-green/10 border border-google-green/30 px-2 py-0.5 rounded font-medium">
-                  300 DPI
+                <span className="text-[10px] font-mono text-primary font-semibold bg-surface-muted border border-border px-2.5 py-0.5 rounded-full">
+                  {CARD_SIZES[config.sizeId]?.widthMm} × {CARD_SIZES[config.sizeId]?.heightMm} mm
                 </span>
-                <span className="text-[10px] font-mono text-secondary bg-surface-muted px-2 py-0.5 rounded border border-border">
-                  VEKTOR PDF
+                <span className="text-[10px] font-mono text-google-green bg-google-green/10 border border-google-green/30 px-2 py-0.5 rounded-full font-medium">
+                  300 DPI
                 </span>
               </div>
             </div>
 
-            {/* The Live Card Stage */}
-            <div className="min-h-[340px] sm:min-h-[420px] flex items-center justify-center bg-canvas rounded-xl border border-border overflow-hidden">
+            {/* Seamless Hero Card Stage - Direct Floating Physical Card (Zero Nested Boxes) */}
+            <div className="py-2 sm:py-4 flex items-center justify-center overflow-hidden">
               <CardCanvas config={config} cardRef={cardRef} />
             </div>
 

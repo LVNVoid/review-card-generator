@@ -66,51 +66,29 @@ export function CardCanvas({ config, cardRef }: CardCanvasProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-2 sm:p-6 lg:p-8">
-      {/* Physical Dimension Indicators */}
-      <div className="flex items-center justify-between w-full max-w-[500px] mb-3 text-xs font-mono text-secondary px-1">
-        <span className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-google-green animate-pulse" />
-          <span className="text-primary font-medium">SKALA CETAK FISIK</span>
-        </span>
-        <span className="bg-surface px-3 py-1 rounded-full border border-border text-secondary">
-          {sizeConfig.widthMm} × {sizeConfig.heightMm} mm
-        </span>
-      </div>
-
-      {/* Live Card Container Studio Stage with Zero-Clip Responsive Fit */}
+    <div ref={stageRef} className="flex items-center justify-center w-full py-4 sm:py-6 overflow-hidden">
       <div
-        ref={stageRef}
-        className="w-full flex items-center justify-center p-2 sm:p-4 rounded-3xl bg-surface/60 border border-border/70 shadow-2xl backdrop-blur max-w-full overflow-hidden"
+        style={{
+          width: `${Math.round(widthPx * scale)}px`,
+          height: `${Math.round(heightPx * scale)}px`,
+          position: "relative",
+          flexShrink: 0,
+          transition: "width 0.2s ease, height 0.2s ease",
+        }}
       >
         <div
+          ref={cardRef}
           style={{
-            width: `${Math.round(widthPx * scale)}px`,
-            height: `${Math.round(heightPx * scale)}px`,
-            position: "relative",
-            flexShrink: 0,
-            transition: "width 0.2s ease, height 0.2s ease",
+            width: `${widthPx}px`,
+            height: `${heightPx}px`,
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
           }}
+          className="rounded-2xl overflow-hidden shadow-2xl transition-shadow"
         >
-          <div
-            ref={cardRef}
-            style={{
-              width: `${widthPx}px`,
-              height: `${heightPx}px`,
-              transform: `scale(${scale})`,
-              transformOrigin: "top left",
-            }}
-            className="rounded-2xl overflow-hidden shadow-2xl"
-          >
-            {renderTemplate()}
-          </div>
+          {renderTemplate()}
         </div>
       </div>
-
-      {/* Print Notes Guide */}
-      <p className="mt-4 text-center text-xs text-secondary max-w-md leading-relaxed">
-        Preview menyesuaikan skala layar otomatis. PDF & PNG diekspor pada rasio fisik presisi 1:1 siap cetak.
-      </p>
     </div>
   );
 }
