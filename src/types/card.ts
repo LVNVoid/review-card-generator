@@ -112,6 +112,8 @@ export const CardConfigSchema = z.object({
   includeBleedMarks: z.boolean().default(false),
   isDynamicMode: z.boolean().optional().default(false),
   cardId: z.string().optional(),
+  badgeText: z.string().max(40).default("SCAN ATAU TAP DI SINI"),
+  showSerialId: z.boolean().default(false),
 });
 
 export type CardConfig = z.infer<typeof CardConfigSchema>;

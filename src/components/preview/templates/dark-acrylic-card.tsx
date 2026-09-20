@@ -57,11 +57,11 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <GoogleLogo size={22} />
-                <span className="text-[10px] font-mono font-bold tracking-widest text-zinc-400 uppercase">
-                  GOOGLE REVIEW
+                <span className="text-[10px] font-google-sans font-bold tracking-widest text-zinc-400 uppercase">
+                  Google Review
                 </span>
                 {config.showNfcIcon && (
-                  <span className="ml-auto inline-flex items-center gap-1 text-[8px] font-mono text-google-yellow bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-700 shrink-0">
+                  <span className="ml-auto inline-flex items-center gap-1 text-[8px] font-google-sans font-semibold text-google-yellow bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-700 shrink-0">
                     <NfcWaveIcon size={10} />
                     <span>NFC</span>
                   </span>
@@ -111,11 +111,13 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
               logoDataUrl={config.logoDataUrl}
               size={metrics.qrSize}
             />
-            <span className="text-[9px] font-bold font-mono tracking-wider text-zinc-900 mt-1.5 text-center">
-              {config.isDynamicMode ? "SCAN AKTIVASI" : "SCAN TO REVIEW"}
-            </span>
-            {config.isDynamicMode && config.cardId && (
-              <span className="text-[7.5px] font-mono text-zinc-600 -mt-0.5">
+            {config.badgeText && (
+              <span className="text-[9px] font-bold font-google-sans tracking-wider text-zinc-900 mt-1.5 text-center">
+                {config.badgeText}
+              </span>
+            )}
+            {config.showSerialId && config.cardId && (
+              <span className="text-[7.5px] font-google-sans text-zinc-600 -mt-0.5">
                 ID: {config.cardId}
               </span>
             )}
@@ -129,12 +131,12 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
             <div className="flex items-center justify-between w-full mb-0.5 px-0.5">
               <div className="flex items-center gap-1.5">
                 <GoogleLogo size={isSquare ? 20 : 24} />
-                <span className="text-xs font-mono font-bold tracking-widest text-zinc-300 uppercase">
-                  GOOGLE REVIEW
+                <span className="text-xs font-google-sans font-bold tracking-widest text-zinc-300 uppercase">
+                  Google Review
                 </span>
               </div>
               {config.showNfcIcon && (
-                <span className="inline-flex items-center gap-1 text-[9px] font-mono text-google-yellow bg-zinc-800 px-2 py-0.5 rounded-full border border-zinc-700">
+                <span className="inline-flex items-center gap-1 text-[9px] font-google-sans font-semibold text-google-yellow bg-zinc-800 px-2 py-0.5 rounded-full border border-zinc-700">
                   <NfcWaveIcon size={11} />
                   <span>TAP NFC</span>
                 </span>
@@ -191,15 +193,19 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
 
           {/* Bottom Action */}
           <div className="w-full space-y-1 shrink-0 pt-1">
-            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-zinc-800 border border-zinc-700 text-google-yellow text-[10px] font-mono font-bold tracking-wider shadow-sm">
-              <span>{config.isDynamicMode ? "SCAN UNTUK AKTIVASI" : "SCAN KODE QR DI ATAS"}</span>
-            </div>
-            <p className="text-[9px] text-zinc-400 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
-              {config.callToAction}
-            </p>
-            {config.isDynamicMode && config.cardId && (
-              <p className="text-[7.5px] font-mono text-zinc-500">
-                SERIAL: {config.cardId}
+            {config.badgeText && (
+              <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-zinc-800 border border-zinc-700 text-google-yellow text-[10px] font-bold tracking-wider font-google-sans shadow-sm">
+                <span>{config.badgeText}</span>
+              </div>
+            )}
+            {config.callToAction && (
+              <p className="text-[9px] text-zinc-400 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
+                {config.callToAction}
+              </p>
+            )}
+            {config.showSerialId && config.cardId && (
+              <p className="text-[7.5px] font-google-sans font-medium text-zinc-500">
+                ID: {config.cardId}
               </p>
             )}
           </div>

@@ -61,7 +61,7 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
                   Google Review
                 </span>
                 {config.showNfcIcon && (
-                  <span className="ml-auto inline-flex items-center gap-1 text-[8px] font-mono font-bold text-zinc-600 bg-zinc-100 px-1.5 py-0.5 rounded border border-zinc-200 shrink-0">
+                  <span className="ml-auto inline-flex items-center gap-1 text-[8px] font-google-sans font-bold text-zinc-600 bg-zinc-100 px-1.5 py-0.5 rounded border border-zinc-200 shrink-0">
                     <NfcWaveIcon size={10} />
                     <span>NFC</span>
                   </span>
@@ -111,11 +111,13 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
               logoDataUrl={config.logoDataUrl}
               size={metrics.qrSize}
             />
-            <span className="text-[9px] font-bold font-google-sans tracking-wider text-google-blue mt-1.5 text-center">
-              {config.isDynamicMode ? "SCAN AKTIVASI" : "SCAN TO REVIEW"}
-            </span>
-            {config.isDynamicMode && config.cardId && (
-              <span className="text-[7.5px] font-mono text-zinc-400 -mt-0.5">
+            {config.badgeText && (
+              <span className="text-[9px] font-bold font-google-sans tracking-wider text-google-blue mt-1.5 text-center">
+                {config.badgeText}
+              </span>
+            )}
+            {config.showSerialId && config.cardId && (
+              <span className="text-[7.5px] font-google-sans text-zinc-400 -mt-0.5">
                 ID: {config.cardId}
               </span>
             )}
@@ -134,7 +136,7 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
                 </span>
               </div>
               {config.showNfcIcon && (
-                <span className="inline-flex items-center gap-1 text-[9px] font-mono font-bold text-zinc-600 bg-zinc-100 px-2 py-0.5 rounded-full border border-zinc-200">
+                <span className="inline-flex items-center gap-1 text-[9px] font-google-sans font-bold text-zinc-600 bg-zinc-100 px-2 py-0.5 rounded-full border border-zinc-200">
                   <NfcWaveIcon size={11} />
                   <span>TAP NFC</span>
                 </span>
@@ -191,15 +193,19 @@ export function GoogleOfficialCard({ config }: TemplateProps) {
 
           {/* Bottom Call to Action */}
           <div className="w-full space-y-1 shrink-0 pt-1">
-            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-google-blue text-white text-[10px] font-bold font-google-sans tracking-wider shadow-sm">
-              <span>{config.isDynamicMode ? "SCAN UNTUK AKTIVASI" : "SCAN KODE QR DI ATAS"}</span>
-            </div>
-            <p className="text-[9px] text-zinc-500 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
-              {config.callToAction}
-            </p>
-            {config.isDynamicMode && config.cardId && (
-              <p className="text-[7.5px] font-mono font-bold text-zinc-400">
-                SERIAL: {config.cardId}
+            {config.badgeText && (
+              <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-google-blue text-white text-[10px] font-bold font-google-sans tracking-wider shadow-sm">
+                <span>{config.badgeText}</span>
+              </div>
+            )}
+            {config.callToAction && (
+              <p className="text-[9px] text-zinc-500 font-medium px-2 leading-tight line-clamp-1 font-google-sans-text">
+                {config.callToAction}
+              </p>
+            )}
+            {config.showSerialId && config.cardId && (
+              <p className="text-[7.5px] font-google-sans font-medium text-zinc-400">
+                ID: {config.cardId}
               </p>
             )}
           </div>

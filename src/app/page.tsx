@@ -28,6 +28,8 @@ export default function WorkbenchPage() {
     showNfcIcon: true,
     includeBleedMarks: false,
     isDynamicMode: false,
+    badgeText: "SCAN ATAU TAP DI SINI",
+    showSerialId: false,
   });
 
   const handleConfigChange = (updated: Partial<CardConfig>) => {

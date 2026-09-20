@@ -21,6 +21,7 @@ import {
   ExternalLink,
   Search,
   Loader2,
+  Hash,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { expandAndConvertReviewUrlAction } from "@/actions/card-actions";
@@ -60,7 +61,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
         cardId: newId,
         businessName: "",
         tagline: "Beri Ulasan Pengalaman Anda di Google",
-        callToAction: "Pindai kode QR untuk memberikan rating & ulasan bintang 5",
+        badgeText: "SCAN ATAU TAP DI SINI",
+        callToAction: "Dekatkan ponsel atau pindai QR code untuk ulasan bintang 5",
+        showSerialId: false,
         googleReviewUrl: `${origin}/r/${newId}`,
       });
     } else {
@@ -68,7 +71,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
         isDynamicMode: false,
         businessName: "Nusantara Artisan Bistro",
         tagline: "Beri Ulasan Pengalaman Anda di Google",
-        callToAction: "Pindai kode QR untuk memberikan rating & ulasan bintang 5",
+        badgeText: "SCAN ATAU TAP DI SINI",
+        callToAction: "Dekatkan ponsel atau pindai QR code untuk ulasan bintang 5",
+        showSerialId: false,
         googleReviewUrl: urlInput || "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
       });
     }
@@ -349,8 +354,8 @@ export function CardForm({ config, onChange }: CardFormProps) {
         </div>
       )}
 
-      {/* Grid for Tagline & CTA */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {/* Grid for Tagline, Badge & CTA */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="space-y-2">
           <Label>Tagline Kartu (Atas)</Label>
           <Input
@@ -362,12 +367,22 @@ export function CardForm({ config, onChange }: CardFormProps) {
         </div>
 
         <div className="space-y-2">
+          <Label>Teks Badge Tombol</Label>
+          <Input
+            value={config.badgeText ?? "SCAN ATAU TAP DI SINI"}
+            maxLength={40}
+            onChange={(e) => onChange({ badgeText: e.target.value })}
+            placeholder="Kosongkan untuk sembunyikan"
+          />
+        </div>
+
+        <div className="space-y-2">
           <Label>Call to Action (Bawah)</Label>
           <Input
             value={config.callToAction}
             maxLength={100}
             onChange={(e) => onChange({ callToAction: e.target.value })}
-            placeholder="Pindai QR code untuk beri ulasan & rating bintang 5"
+            placeholder="Pindai QR code untuk ulasan bintang 5"
           />
         </div>
       </div>
@@ -378,10 +393,10 @@ export function CardForm({ config, onChange }: CardFormProps) {
           Opsi Tampilan Cetak
         </span>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <label
             className={cn(
-              "flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
+              "flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
               config.showRatingStars
                 ? "bg-surface-muted border-google-yellow/40 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
@@ -400,13 +415,13 @@ export function CardForm({ config, onChange }: CardFormProps) {
                   config.showRatingStars ? "text-google-yellow fill-google-yellow" : "text-secondary"
                 )}
               />
-              <span>5 Bintang Emas</span>
+              <span>5 Bintang</span>
             </div>
           </label>
 
           <label
             className={cn(
-              "flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
+              "flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
               config.showNfcIcon
                 ? "bg-surface-muted border-google-blue/40 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
@@ -425,13 +440,33 @@ export function CardForm({ config, onChange }: CardFormProps) {
                   config.showNfcIcon ? "text-google-blue" : "text-secondary"
                 )}
               />
-              <span>Ikon Tap NFC</span>
+              <span>Ikon NFC</span>
             </div>
           </label>
 
           <label
             className={cn(
-              "flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
+              "flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
+              config.showSerialId
+                ? "bg-surface-muted border-google-green/40 text-primary shadow-xs"
+                : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
+            )}
+          >
+            <input
+              type="checkbox"
+              checked={config.showSerialId ?? false}
+              onChange={(e) => onChange({ showSerialId: e.target.checked })}
+              className="w-4 h-4 rounded text-google-green bg-surface border-border accent-google-green cursor-pointer"
+            />
+            <div className="flex items-center gap-1.5 text-xs font-medium">
+              <Hash className="w-3.5 h-3.5 text-secondary" />
+              <span>Serial ID</span>
+            </div>
+          </label>
+
+          <label
+            className={cn(
+              "flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
               config.includeBleedMarks
                 ? "bg-surface-muted border-primary/40 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
@@ -445,7 +480,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
             />
             <div className="flex items-center gap-1.5 text-xs font-medium">
               <Crop className="w-3.5 h-3.5 text-secondary" />
-              <span>Garis Potong Bleed</span>
+              <span>Garis Bleed</span>
             </div>
           </label>
         </div>
