@@ -24,28 +24,28 @@ export function SizeSelector({ selectedSize, onSelectSize }: SizeSelectorProps) 
               type="button"
               onClick={() => onSelectSize(size.id)}
               className={cn(
-                "flex flex-col items-start p-3 sm:p-4 rounded-xl border text-left transition-all cursor-pointer min-h-[56px] w-[210px] sm:w-auto shrink-0 snap-start",
+                "flex flex-col items-start p-3 sm:p-4 rounded-2xl border text-left transition-all cursor-pointer min-h-[56px] w-[210px] sm:w-auto shrink-0 snap-start",
                 isSelected
-                  ? "bg-surface-muted border-google-blue ring-1 ring-google-blue/30 shadow-sm"
+                  ? "bg-m3-tonal/20 border-m3-primary ring-1 ring-m3-primary/30 shadow-xs"
                   : "bg-surface border-border hover:border-border-hover hover:bg-surface-muted/40"
               )}
             >
               <div className="flex items-center justify-between w-full mb-1">
-                <span className="text-xs font-semibold text-primary flex items-center gap-1.5 truncate">
+                <span className="text-xs font-semibold text-primary flex items-center gap-1.5 truncate font-google-sans">
                   {size.id.includes("pvc") ? (
-                    <CreditCard className={cn("w-3.5 h-3.5 shrink-0", isSelected ? "text-google-blue" : "text-secondary")} />
+                    <CreditCard className={cn("w-3.5 h-3.5 shrink-0", isSelected ? "text-m3-primary" : "text-secondary")} />
                   ) : size.id.includes("standee") ? (
-                    <PanelsTopLeft className={cn("w-3.5 h-3.5 shrink-0", isSelected ? "text-google-blue" : "text-secondary")} />
+                    <PanelsTopLeft className={cn("w-3.5 h-3.5 shrink-0", isSelected ? "text-m3-primary" : "text-secondary")} />
                   ) : (
-                    <Maximize2 className={cn("w-3.5 h-3.5 shrink-0", isSelected ? "text-google-blue" : "text-secondary")} />
+                    <Maximize2 className={cn("w-3.5 h-3.5 shrink-0", isSelected ? "text-m3-primary" : "text-secondary")} />
                   )}
                   <span className="truncate">{size.name}</span>
                 </span>
                 <span className={cn(
-                  "text-[9px] font-mono px-1.5 py-0.5 rounded border transition-colors shrink-0 ml-1",
+                  "text-[9px] font-mono px-2 py-0.5 rounded-full border transition-colors shrink-0 ml-1",
                   isSelected
-                    ? "bg-google-blue/10 border-google-blue/30 text-google-blue font-medium"
-                    : "bg-surface border-border text-secondary"
+                    ? "bg-m3-tonal/40 border-m3-primary/30 text-m3-primary font-medium"
+                    : "bg-surface-muted border-border text-secondary"
                 )}>
                   {size.badge}
                 </span>

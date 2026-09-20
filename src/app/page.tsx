@@ -9,6 +9,7 @@ import { LogoUploader } from "@/components/editor/logo-uploader";
 import { CardCanvas } from "@/components/preview/card-canvas";
 import { ExportToolbar } from "@/components/preview/export-toolbar";
 import { GoogleLogo } from "@/components/ui/google-icons";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import Link from "next/link";
 import { Sliders, Eye, Printer, Layers, Compass, Sparkles, QrCode } from "lucide-react";
 
@@ -62,22 +63,24 @@ export default function WorkbenchPage() {
 
         {/* Mobile Nav & Tab Switcher */}
         <div className="flex md:hidden items-center gap-1.5 shrink-0">
+          <ThemeToggle />
+
           <Link
             href="/cards"
-            className="flex items-center justify-center w-[38px] h-[38px] rounded-xl bg-surface border border-border text-secondary hover:text-primary transition-colors cursor-pointer"
+            className="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-surface border border-border text-secondary hover:text-primary transition-colors cursor-pointer"
             title="Daftar Kartu QR"
           >
             <QrCode size={16} />
           </Link>
 
-          <div className="flex items-center p-1 rounded-xl bg-surface border border-border shrink-0">
+          <div className="flex items-center p-1 rounded-full bg-surface border border-border shrink-0">
             <button
               type="button"
               onClick={() => {
                 setActiveMobileTab("editor");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all min-h-[38px] cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all min-h-[34px] cursor-pointer ${
                 activeMobileTab === "editor"
                   ? "bg-google-blue text-white shadow-sm font-semibold"
                   : "text-secondary hover:text-primary"
@@ -92,7 +95,7 @@ export default function WorkbenchPage() {
                 setActiveMobileTab("preview");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all min-h-[38px] cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all min-h-[34px] cursor-pointer ${
                 activeMobileTab === "preview"
                   ? "bg-google-blue text-white shadow-sm font-semibold"
                   : "text-secondary hover:text-primary"
@@ -106,15 +109,17 @@ export default function WorkbenchPage() {
 
         {/* Desktop Quick Indicator */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
+
           <Link
             href="/cards"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface border border-border text-xs font-semibold text-primary hover:border-google-blue hover:text-google-blue transition-all cursor-pointer shadow-xs"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface border border-border text-xs font-semibold text-primary hover:border-google-blue hover:text-google-blue transition-all cursor-pointer shadow-xs"
           >
             <QrCode size={14} className="text-google-blue" />
             <span>Daftar Kartu QR</span>
           </Link>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface border border-border text-xs text-secondary font-mono">
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-border text-xs text-secondary font-mono">
             <span className="w-2 h-2 rounded-full bg-google-green animate-pulse" />
             <span>SIAP CETAK FISIK</span>
           </div>
@@ -130,7 +135,7 @@ export default function WorkbenchPage() {
           }`}
         >
           {/* Section 1: Dimensi & Tema Visual */}
-          <div className="bg-surface rounded-xl sm:rounded-2xl border border-border p-3.5 sm:p-6 space-y-4 sm:space-y-5 hover:border-border-hover transition-colors shadow-sm">
+          <div className="bg-surface rounded-2xl sm:rounded-3xl border border-border p-3.5 sm:p-6 space-y-4 sm:space-y-5 hover:border-border-hover transition-colors shadow-sm">
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -171,7 +176,7 @@ export default function WorkbenchPage() {
           </div>
 
           {/* Section 2: Informasi Tempat & Link Review */}
-          <div className="bg-surface rounded-xl sm:rounded-2xl border border-border p-3.5 sm:p-6 space-y-3.5 sm:space-y-5 hover:border-border-hover transition-colors shadow-sm">
+          <div className="bg-surface rounded-2xl sm:rounded-3xl border border-border p-3.5 sm:p-6 space-y-3.5 sm:space-y-5 hover:border-border-hover transition-colors shadow-sm">
             <div className="flex items-center gap-2">
               <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md sm:rounded-lg bg-google-blue/10 border border-google-blue/30 flex items-center justify-center text-google-blue text-[11px] sm:text-xs font-bold font-mono">
                 2
@@ -188,7 +193,7 @@ export default function WorkbenchPage() {
           </div>
 
           {/* Section 3: Logo QR Code */}
-          <div className="bg-surface rounded-xl sm:rounded-2xl border border-border p-3.5 sm:p-6 space-y-3 sm:space-y-4 hover:border-border-hover transition-colors shadow-sm">
+          <div className="bg-surface rounded-2xl sm:rounded-3xl border border-border p-3.5 sm:p-6 space-y-3 sm:space-y-4 hover:border-border-hover transition-colors shadow-sm">
             <div className="flex items-center gap-2">
               <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md sm:rounded-lg bg-google-blue/10 border border-google-blue/30 flex items-center justify-center text-google-blue text-[11px] sm:text-xs font-bold font-mono">
                 3
@@ -211,7 +216,7 @@ export default function WorkbenchPage() {
             activeMobileTab === "editor" ? "hidden md:block" : "block"
           }`}
         >
-          <div className="bg-surface rounded-2xl border border-border p-4 sm:p-8 space-y-5 sm:space-y-6 shadow-2xl">
+          <div className="bg-surface rounded-2xl sm:rounded-3xl border border-border p-4 sm:p-8 space-y-5 sm:space-y-6 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div className="flex items-center gap-2.5">
                 <Printer className="w-4 h-4 text-google-blue" />

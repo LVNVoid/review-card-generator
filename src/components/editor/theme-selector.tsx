@@ -32,9 +32,9 @@ export function ThemeSelector({ selectedTheme, onSelectTheme }: ThemeSelectorPro
               type="button"
               onClick={() => onSelectTheme(theme.id)}
               className={cn(
-                "flex flex-col items-start p-3 sm:p-4 rounded-xl border text-left transition-all cursor-pointer min-h-[56px] w-[190px] sm:w-auto shrink-0 snap-start",
+                "flex flex-col items-start p-3 sm:p-4 rounded-2xl border text-left transition-all cursor-pointer min-h-[56px] w-[190px] sm:w-auto shrink-0 snap-start",
                 isSelected
-                  ? "bg-surface-muted border-google-blue ring-1 ring-google-blue/30 shadow-sm"
+                  ? "bg-m3-tonal/20 border-m3-primary ring-1 ring-m3-primary/30 shadow-xs"
                   : "bg-surface border-border hover:border-border-hover hover:bg-surface-muted/40"
               )}
             >
@@ -42,18 +42,18 @@ export function ThemeSelector({ selectedTheme, onSelectTheme }: ThemeSelectorPro
                 <IconComponent
                   className={cn(
                     "w-3.5 h-3.5 shrink-0",
-                    isSelected ? "text-google-blue" : "text-secondary"
+                    isSelected ? "text-m3-primary" : "text-secondary"
                   )}
                 />
-                <span className="text-xs font-semibold text-primary truncate">
+                <span className="text-xs font-semibold text-primary truncate font-google-sans">
                   {theme.name}
                 </span>
               </div>
               <span className={cn(
-                "text-[9px] font-mono mb-1 px-1.5 py-0.5 rounded border",
+                "text-[9px] font-mono mb-1 px-2 py-0.5 rounded-full border",
                 isSelected
-                  ? "bg-google-blue/10 border-google-blue/30 text-google-blue"
-                  : "bg-surface border-border text-secondary"
+                  ? "bg-m3-tonal/40 border-m3-primary/30 text-m3-primary"
+                  : "bg-surface-muted border-border text-secondary"
               )}>
                 {theme.tag}
               </span>

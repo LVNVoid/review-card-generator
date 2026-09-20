@@ -188,18 +188,18 @@ export function CardForm({ config, onChange }: CardFormProps) {
   return (
     <div className="space-y-3.5 sm:space-y-4">
       {/* Mode Switcher: Link Langsung vs Cetak Kosong (Dynamic) */}
-      <div className="p-1 rounded-xl bg-surface border border-border grid grid-cols-2 gap-1 shadow-xs">
+      <div className="p-1 rounded-full bg-surface border border-border grid grid-cols-2 gap-1 shadow-xs">
         <button
           type="button"
           onClick={() => handleModeSwitch(false)}
           className={cn(
-            "flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-[11px] sm:text-xs font-semibold font-google-sans transition-all cursor-pointer",
+            "flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-full text-[11px] sm:text-xs font-semibold font-google-sans transition-all cursor-pointer min-h-[34px]",
             !config.isDynamicMode
               ? "bg-canvas text-primary border border-border shadow-xs"
               : "text-secondary hover:text-primary"
           )}
         >
-          <LinkIcon size={13} className={!config.isDynamicMode ? "text-google-blue" : ""} />
+          <LinkIcon size={13} className={!config.isDynamicMode ? "text-m3-primary" : ""} />
           <span className="truncate">Link Ulasan Langsung</span>
         </button>
 
@@ -207,7 +207,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
           type="button"
           onClick={() => handleModeSwitch(true)}
           className={cn(
-            "flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-[11px] sm:text-xs font-semibold font-google-sans transition-all cursor-pointer",
+            "flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-full text-[11px] sm:text-xs font-semibold font-google-sans transition-all cursor-pointer min-h-[34px]",
             config.isDynamicMode
               ? "bg-canvas text-primary border border-border shadow-xs"
               : "text-secondary hover:text-primary"
@@ -425,9 +425,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           <label
             className={cn(
-              "flex items-center gap-2 p-2 sm:p-2.5 rounded-lg border cursor-pointer select-none transition-all min-h-[38px]",
+              "flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border cursor-pointer select-none transition-all min-h-[38px] font-google-sans",
               config.showRatingStars
-                ? "bg-surface-muted border-google-yellow/40 text-primary shadow-xs"
+                ? "bg-m3-tonal/20 border-google-yellow/50 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
             )}
           >
@@ -450,9 +450,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
 
           <label
             className={cn(
-              "flex items-center gap-2 p-2 sm:p-2.5 rounded-lg border cursor-pointer select-none transition-all min-h-[38px]",
+              "flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border cursor-pointer select-none transition-all min-h-[38px] font-google-sans",
               config.showNfcIcon
-                ? "bg-surface-muted border-google-blue/40 text-primary shadow-xs"
+                ? "bg-m3-tonal/20 border-m3-primary/50 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
             )}
           >
@@ -460,13 +460,13 @@ export function CardForm({ config, onChange }: CardFormProps) {
               type="checkbox"
               checked={config.showNfcIcon}
               onChange={(e) => onChange({ showNfcIcon: e.target.checked })}
-              className="w-3.5 h-3.5 rounded text-google-blue bg-surface border-border accent-google-blue cursor-pointer"
+              className="w-3.5 h-3.5 rounded text-m3-primary bg-surface border-border accent-m3-primary cursor-pointer"
             />
             <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium">
               <Radio
                 className={cn(
                   "w-3.5 h-3.5 shrink-0",
-                  config.showNfcIcon ? "text-google-blue" : "text-secondary"
+                  config.showNfcIcon ? "text-m3-primary" : "text-secondary"
                 )}
               />
               <span>Ikon NFC</span>
@@ -475,9 +475,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
 
           <label
             className={cn(
-              "flex items-center gap-2 p-2 sm:p-2.5 rounded-lg border cursor-pointer select-none transition-all min-h-[38px]",
+              "flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border cursor-pointer select-none transition-all min-h-[38px] font-google-sans",
               config.showSerialId
-                ? "bg-surface-muted border-google-green/40 text-primary shadow-xs"
+                ? "bg-m3-tonal/20 border-google-green/50 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
             )}
           >
@@ -495,9 +495,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
 
           <label
             className={cn(
-              "flex items-center gap-2 p-2 sm:p-2.5 rounded-lg border cursor-pointer select-none transition-all min-h-[38px]",
+              "flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border cursor-pointer select-none transition-all min-h-[38px] font-google-sans",
               config.includeBleedMarks
-                ? "bg-surface-muted border-primary/40 text-primary shadow-xs"
+                ? "bg-m3-tonal/20 border-primary/40 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
             )}
           >

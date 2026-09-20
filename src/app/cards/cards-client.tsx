@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { GoogleLogo } from "@/components/ui/google-icons";
 import { QrRenderer } from "@/components/preview/qr-renderer";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { listCardsAction } from "@/actions/card-actions";
@@ -144,12 +145,14 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
 
         {/* Action Header Button */}
         <div className="flex items-center gap-2 shrink-0">
+          <ThemeToggle />
+
           <Button
             variant="secondary"
             size="sm"
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="h-9 px-2.5 sm:px-3 text-xs font-google-sans cursor-pointer"
+            className="h-9 px-2.5 sm:px-3 text-xs font-google-sans cursor-pointer rounded-full"
           >
             <RefreshCw size={13} className={cn(isRefreshing && "animate-spin")} />
             <span className="hidden sm:inline ml-1">Segarkan</span>
@@ -159,7 +162,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <Button
               variant="google"
               size="sm"
-              className="h-9 px-3 text-xs font-google-sans font-semibold cursor-pointer shadow-sm"
+              className="h-9 px-3 text-xs font-google-sans font-semibold cursor-pointer shadow-sm rounded-full"
             >
               <Plus size={14} />
               <span>Buat Kartu Baru</span>
@@ -172,7 +175,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
       <main className="flex-1 max-w-5xl w-full mx-auto px-3.5 py-4 sm:p-6 space-y-4 sm:space-y-6">
         {/* 2x2 Metric Grid for Mobile (4-col on Desktop) */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
-          <div className="p-3 sm:p-4 rounded-xl bg-surface border border-border space-y-1">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-surface border border-border space-y-1 shadow-xs">
             <div className="flex items-center justify-between">
               <span className="text-[10px] sm:text-[11px] font-mono font-medium text-secondary uppercase">
                 Total Kartu
@@ -185,7 +188,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <span className="text-[10px] text-secondary">Unit terdaftar</span>
           </div>
 
-          <div className="p-3 sm:p-4 rounded-xl bg-surface border border-border space-y-1">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-surface border border-border space-y-1 shadow-xs">
             <div className="flex items-center justify-between">
               <span className="text-[10px] sm:text-[11px] font-mono font-medium text-google-green uppercase">
                 Kartu Aktif
@@ -198,7 +201,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <span className="text-[10px] text-secondary">Terpasang di toko</span>
           </div>
 
-          <div className="p-3 sm:p-4 rounded-xl bg-surface border border-border space-y-1">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-surface border border-border space-y-1 shadow-xs">
             <div className="flex items-center justify-between">
               <span className="text-[10px] sm:text-[11px] font-mono font-medium text-google-yellow uppercase">
                 Pending
@@ -211,14 +214,14 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <span className="text-[10px] text-secondary">Siap dijual / aktivasi</span>
           </div>
 
-          <div className="p-3 sm:p-4 rounded-xl bg-surface border border-border space-y-1">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-surface border border-border space-y-1 shadow-xs">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] sm:text-[11px] font-mono font-medium text-google-blue uppercase">
+              <span className="text-[10px] sm:text-[11px] font-mono font-medium text-m3-primary uppercase">
                 Total Scan
               </span>
-              <Sparkles size={13} className="text-google-blue" />
+              <Sparkles size={13} className="text-m3-primary" />
             </div>
-            <div className="text-lg sm:text-2xl font-bold font-google-sans text-google-blue">
+            <div className="text-lg sm:text-2xl font-bold font-google-sans text-m3-primary">
               {metrics.totalScans}
             </div>
             <span className="text-[10px] text-secondary">Interaksi pelanggan</span>
@@ -226,7 +229,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="bg-surface border border-border rounded-xl p-2.5 sm:p-3 space-y-2.5 sm:space-y-0 sm:flex sm:items-center sm:justify-between sm:gap-3">
+        <div className="bg-surface border border-border rounded-2xl p-2.5 sm:p-3 space-y-2.5 sm:space-y-0 sm:flex sm:items-center sm:justify-between sm:gap-3 shadow-xs">
           {/* Search Box */}
           <div className="relative flex-1">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary" />
@@ -234,17 +237,17 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari ID kartu / nama toko / batch..."
-              className="pl-8 h-9 text-xs sm:text-sm bg-canvas"
+              className="pl-8 h-9.5 text-xs sm:text-sm bg-canvas rounded-xl"
             />
           </div>
 
           {/* Status Filter Tabs */}
-          <div className="flex items-center p-1 rounded-lg bg-canvas border border-border self-start sm:self-auto shrink-0 w-full sm:w-auto">
+          <div className="flex items-center p-1 rounded-full bg-canvas border border-border self-start sm:self-auto shrink-0 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setStatusFilter("ALL")}
               className={cn(
-                "flex-1 sm:flex-initial px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer text-center",
+                "flex-1 sm:flex-initial px-3.5 py-1.5 rounded-full text-xs font-medium font-google-sans transition-all cursor-pointer text-center",
                 statusFilter === "ALL"
                   ? "bg-surface text-primary shadow-xs font-semibold"
                   : "text-secondary hover:text-primary"
@@ -256,7 +259,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
               type="button"
               onClick={() => setStatusFilter("ACTIVE")}
               className={cn(
-                "flex-1 sm:flex-initial px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer text-center",
+                "flex-1 sm:flex-initial px-3.5 py-1.5 rounded-full text-xs font-medium font-google-sans transition-all cursor-pointer text-center",
                 statusFilter === "ACTIVE"
                   ? "bg-surface text-google-green shadow-xs font-semibold"
                   : "text-secondary hover:text-primary"
@@ -268,7 +271,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
               type="button"
               onClick={() => setStatusFilter("PENDING")}
               className={cn(
-                "flex-1 sm:flex-initial px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer text-center",
+                "flex-1 sm:flex-initial px-3.5 py-1.5 rounded-full text-xs font-medium font-google-sans transition-all cursor-pointer text-center",
                 statusFilter === "PENDING"
                   ? "bg-surface text-google-yellow shadow-xs font-semibold"
                   : "text-secondary hover:text-primary"
@@ -324,12 +327,12 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
               return (
                 <div
                   key={card.id}
-                  className="p-3.5 sm:p-4 rounded-xl bg-surface border border-border hover:border-border-hover transition-all space-y-3 shadow-xs"
+                  className="p-3.5 sm:p-4 rounded-2xl bg-surface border border-border hover:border-border-hover transition-all space-y-3 shadow-xs"
                 >
                   {/* Row 1: Header (Serial ID, Status Badge, Batch ID) */}
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-canvas border border-border font-mono text-xs font-bold text-google-blue">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-canvas border border-border font-mono text-xs font-bold text-m3-primary">
                         <span>{card.id}</span>
                         <button
                           type="button"
@@ -346,7 +349,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
                       </div>
 
                       {card.batchId && (
-                        <span className="hidden sm:inline-block text-[10px] font-mono text-secondary px-1.5 py-0.5 rounded bg-canvas border border-border">
+                        <span className="hidden sm:inline-block text-[10px] font-mono text-secondary px-2 py-0.5 rounded-full bg-canvas border border-border">
                           {card.batchId}
                         </span>
                       )}
