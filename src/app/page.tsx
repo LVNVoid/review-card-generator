@@ -111,26 +111,26 @@ export default function WorkbenchPage() {
       </header>
 
       {/* Main Dual-Column Workbench */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3.5 py-4 sm:p-6 lg:p-8 grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 lg:gap-10 pb-24 md:pb-0">
         {/* Left Column: Editor Controls */}
         <div
-          className={`md:col-span-6 lg:col-span-6 space-y-6 sm:space-y-8 ${
+          className={`md:col-span-6 lg:col-span-6 space-y-4 sm:space-y-6 ${
             activeMobileTab === "preview" ? "hidden md:block" : "block"
           }`}
         >
           {/* Section 1: Dimensi & Tema Visual */}
-          <div className="bg-surface rounded-2xl border border-border p-6 sm:p-7 space-y-6 hover:border-border-hover transition-colors shadow-sm">
-            <div className="space-y-3">
+          <div className="bg-surface rounded-xl sm:rounded-2xl border border-border p-3.5 sm:p-6 space-y-4 sm:space-y-5 hover:border-border-hover transition-colors shadow-sm">
+            <div className="space-y-2.5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-lg bg-google-blue/10 border border-google-blue/30 flex items-center justify-center text-google-blue text-xs font-bold font-mono">
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md sm:rounded-lg bg-google-blue/10 border border-google-blue/30 flex items-center justify-center text-google-blue text-[11px] sm:text-xs font-bold font-mono">
                     1
                   </div>
-                  <h2 className="text-sm font-semibold text-primary">
+                  <h2 className="text-xs sm:text-sm font-semibold text-primary">
                     Format & Ukuran Fisik Kartu
                   </h2>
                 </div>
-                <span className="text-[10px] font-mono text-secondary px-2.5 py-1 rounded-full bg-surface-muted border border-border">
+                <span className="text-[9.5px] sm:text-[10px] font-mono text-secondary px-2 py-0.5 rounded-full bg-surface-muted border border-border">
                   {config.sizeId}
                 </span>
               </div>
@@ -140,15 +140,15 @@ export default function WorkbenchPage() {
               />
             </div>
 
-            <div className="pt-5 border-t border-border space-y-3">
+            <div className="pt-3.5 sm:pt-4 border-t border-border space-y-2.5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-google-yellow" />
-                  <h3 className="text-xs font-semibold text-primary uppercase tracking-wider">
+                <div className="flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-google-yellow" />
+                  <h3 className="text-[11px] sm:text-xs font-semibold text-primary uppercase tracking-wider">
                     Tema Visual
                   </h3>
                 </div>
-                <span className="text-[10px] font-mono text-secondary px-2.5 py-1 rounded-full bg-surface-muted border border-border">
+                <span className="text-[9.5px] sm:text-[10px] font-mono text-secondary px-2 py-0.5 rounded-full bg-surface-muted border border-border">
                   {config.themeId}
                 </span>
               </div>
@@ -160,12 +160,12 @@ export default function WorkbenchPage() {
           </div>
 
           {/* Section 2: Informasi Tempat & Link Review */}
-          <div className="bg-surface rounded-2xl border border-border p-6 sm:p-7 space-y-5 hover:border-border-hover transition-colors shadow-sm">
+          <div className="bg-surface rounded-xl sm:rounded-2xl border border-border p-3.5 sm:p-6 space-y-3.5 sm:space-y-5 hover:border-border-hover transition-colors shadow-sm">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-google-blue/10 border border-google-blue/30 flex items-center justify-center text-google-blue text-xs font-bold font-mono">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md sm:rounded-lg bg-google-blue/10 border border-google-blue/30 flex items-center justify-center text-google-blue text-[11px] sm:text-xs font-bold font-mono">
                 2
               </div>
-              <h2 className="text-sm font-semibold text-primary">
+              <h2 className="text-xs sm:text-sm font-semibold text-primary">
                 Informasi Bisnis & Tautan Google Maps
               </h2>
             </div>
@@ -177,12 +177,12 @@ export default function WorkbenchPage() {
           </div>
 
           {/* Section 3: Logo QR Code */}
-          <div className="bg-surface rounded-2xl border border-border p-6 sm:p-7 space-y-4 hover:border-border-hover transition-colors shadow-sm">
+          <div className="bg-surface rounded-xl sm:rounded-2xl border border-border p-3.5 sm:p-6 space-y-3 sm:space-y-4 hover:border-border-hover transition-colors shadow-sm">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-google-blue/10 border border-google-blue/30 flex items-center justify-center text-google-blue text-xs font-bold font-mono">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md sm:rounded-lg bg-google-blue/10 border border-google-blue/30 flex items-center justify-center text-google-blue text-[11px] sm:text-xs font-bold font-mono">
                 3
               </div>
-              <h2 className="text-sm font-semibold text-primary">
+              <h2 className="text-xs sm:text-sm font-semibold text-primary">
                 Logo Tengah QR Code (Opsional)
               </h2>
             </div>

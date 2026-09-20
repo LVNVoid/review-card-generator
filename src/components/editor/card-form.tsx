@@ -22,6 +22,8 @@ import {
   Search,
   Loader2,
   Hash,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { expandAndConvertReviewUrlAction } from "@/actions/card-actions";
@@ -44,6 +46,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
   const [registeredInDb, setRegisteredInDb] = React.useState(false);
   const [isLocationModalOpen, setIsLocationModalOpen] = React.useState(false);
   const [isConvertingUrl, setIsConvertingUrl] = React.useState(false);
+  const [showTextCustomization, setShowTextCustomization] = React.useState(false);
 
   // Initialize dynamic mode with a card ID if enabled and none exists
   React.useEffect(() => {
@@ -183,35 +186,35 @@ export function CardForm({ config, onChange }: CardFormProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5 sm:space-y-4">
       {/* Mode Switcher: Link Langsung vs Cetak Kosong (Dynamic) */}
-      <div className="p-1 rounded-2xl bg-surface border border-border grid grid-cols-2 gap-1 shadow-xs">
+      <div className="p-1 rounded-xl bg-surface border border-border grid grid-cols-2 gap-1 shadow-xs">
         <button
           type="button"
           onClick={() => handleModeSwitch(false)}
           className={cn(
-            "flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold font-google-sans transition-all cursor-pointer",
+            "flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-[11px] sm:text-xs font-semibold font-google-sans transition-all cursor-pointer",
             !config.isDynamicMode
               ? "bg-canvas text-primary border border-border shadow-xs"
               : "text-secondary hover:text-primary"
           )}
         >
-          <LinkIcon size={14} className={!config.isDynamicMode ? "text-google-blue" : ""} />
-          <span>Link Ulasan Langsung</span>
+          <LinkIcon size={13} className={!config.isDynamicMode ? "text-google-blue" : ""} />
+          <span className="truncate">Link Ulasan Langsung</span>
         </button>
 
         <button
           type="button"
           onClick={() => handleModeSwitch(true)}
           className={cn(
-            "flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold font-google-sans transition-all cursor-pointer",
+            "flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-[11px] sm:text-xs font-semibold font-google-sans transition-all cursor-pointer",
             config.isDynamicMode
               ? "bg-canvas text-primary border border-border shadow-xs"
               : "text-secondary hover:text-primary"
           )}
         >
-          <QrCode size={14} className={config.isDynamicMode ? "text-google-yellow" : ""} />
-          <span>Pra-Cetak Kosong (Aktivasi Nanti)</span>
+          <QrCode size={13} className={config.isDynamicMode ? "text-google-yellow" : ""} />
+          <span className="truncate">Pra-Cetak Kosong</span>
         </button>
       </div>
 
@@ -337,7 +340,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
           </div>
 
           {/* Business Name */}
-          <div className="space-y-2 pt-3">
+          <div className="space-y-1.5 pt-1">
             <div className="flex items-center justify-between">
               <Label required>Nama Tempat / Usaha</Label>
               <span className="text-[10px] font-mono text-secondary">
@@ -354,49 +357,75 @@ export function CardForm({ config, onChange }: CardFormProps) {
         </div>
       )}
 
-      {/* Grid for Tagline, Badge & CTA */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="space-y-2">
-          <Label>Tagline Kartu (Atas)</Label>
-          <Input
-            value={config.tagline}
-            maxLength={80}
-            onChange={(e) => onChange({ tagline: e.target.value })}
-            placeholder="Beri Ulasan Pengalaman Anda di Google"
-          />
-        </div>
+      {/* Collapsible Section for Secondary Card Text Customization */}
+      <div className="border border-border rounded-xl bg-surface/50 overflow-hidden transition-all">
+        <button
+          type="button"
+          onClick={() => setShowTextCustomization(!showTextCustomization)}
+          className="w-full flex items-center justify-between p-2.5 sm:p-3 text-left hover:bg-surface-muted/40 transition-colors cursor-pointer"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-primary font-google-sans">
+              Kustomisasi Teks Kartu
+            </span>
+            <span className="text-[9.5px] text-secondary font-mono bg-surface px-1.5 py-0.5 rounded border border-border">
+              Tagline, Badge, CTA
+            </span>
+          </div>
+          {showTextCustomization ? (
+            <ChevronUp size={15} className="text-secondary" />
+          ) : (
+            <ChevronDown size={15} className="text-secondary" />
+          )}
+        </button>
 
-        <div className="space-y-2">
-          <Label>Teks Badge Tombol</Label>
-          <Input
-            value={config.badgeText ?? "SCAN ATAU TAP DI SINI"}
-            maxLength={40}
-            onChange={(e) => onChange({ badgeText: e.target.value })}
-            placeholder="Kosongkan untuk sembunyikan"
-          />
-        </div>
+        {showTextCustomization && (
+          <div className="p-3 pt-1 border-t border-border space-y-2.5 bg-surface">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="space-y-1">
+                <Label>Tagline Kartu (Atas)</Label>
+                <Input
+                  value={config.tagline}
+                  maxLength={80}
+                  onChange={(e) => onChange({ tagline: e.target.value })}
+                  placeholder="Beri Ulasan Pengalaman Anda di Google"
+                />
+              </div>
 
-        <div className="space-y-2">
-          <Label>Call to Action (Bawah)</Label>
-          <Input
-            value={config.callToAction}
-            maxLength={100}
-            onChange={(e) => onChange({ callToAction: e.target.value })}
-            placeholder="Pindai QR code untuk ulasan bintang 5"
-          />
-        </div>
+              <div className="space-y-1">
+                <Label>Teks Badge Tombol</Label>
+                <Input
+                  value={config.badgeText ?? "SCAN ATAU TAP DI SINI"}
+                  maxLength={40}
+                  onChange={(e) => onChange({ badgeText: e.target.value })}
+                  placeholder="Kosongkan untuk sembunyikan"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <Label>Call to Action (Bawah)</Label>
+                <Input
+                  value={config.callToAction}
+                  maxLength={100}
+                  onChange={(e) => onChange({ callToAction: e.target.value })}
+                  placeholder="Pindai QR code untuk ulasan bintang 5"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Quick Toggles */}
-      <div className="pt-3 border-t border-border space-y-3">
-        <span className="text-[11px] font-mono font-semibold text-secondary uppercase tracking-wider block">
+      <div className="pt-2 border-t border-border space-y-2">
+        <span className="text-[10px] sm:text-[11px] font-mono font-semibold text-secondary uppercase tracking-wider block">
           Opsi Tampilan Cetak
         </span>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           <label
             className={cn(
-              "flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
+              "flex items-center gap-2 p-2 sm:p-2.5 rounded-lg border cursor-pointer select-none transition-all min-h-[38px]",
               config.showRatingStars
                 ? "bg-surface-muted border-google-yellow/40 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
@@ -406,12 +435,12 @@ export function CardForm({ config, onChange }: CardFormProps) {
               type="checkbox"
               checked={config.showRatingStars}
               onChange={(e) => onChange({ showRatingStars: e.target.checked })}
-              className="w-4 h-4 rounded text-google-yellow bg-surface border-border accent-google-yellow cursor-pointer"
+              className="w-3.5 h-3.5 rounded text-google-yellow bg-surface border-border accent-google-yellow cursor-pointer"
             />
-            <div className="flex items-center gap-1.5 text-xs font-medium">
+            <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium">
               <Star
                 className={cn(
-                  "w-3.5 h-3.5",
+                  "w-3.5 h-3.5 shrink-0",
                   config.showRatingStars ? "text-google-yellow fill-google-yellow" : "text-secondary"
                 )}
               />
@@ -421,7 +450,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
 
           <label
             className={cn(
-              "flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
+              "flex items-center gap-2 p-2 sm:p-2.5 rounded-lg border cursor-pointer select-none transition-all min-h-[38px]",
               config.showNfcIcon
                 ? "bg-surface-muted border-google-blue/40 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
@@ -431,12 +460,12 @@ export function CardForm({ config, onChange }: CardFormProps) {
               type="checkbox"
               checked={config.showNfcIcon}
               onChange={(e) => onChange({ showNfcIcon: e.target.checked })}
-              className="w-4 h-4 rounded text-google-blue bg-surface border-border accent-google-blue cursor-pointer"
+              className="w-3.5 h-3.5 rounded text-google-blue bg-surface border-border accent-google-blue cursor-pointer"
             />
-            <div className="flex items-center gap-1.5 text-xs font-medium">
+            <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium">
               <Radio
                 className={cn(
-                  "w-3.5 h-3.5",
+                  "w-3.5 h-3.5 shrink-0",
                   config.showNfcIcon ? "text-google-blue" : "text-secondary"
                 )}
               />
@@ -446,7 +475,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
 
           <label
             className={cn(
-              "flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
+              "flex items-center gap-2 p-2 sm:p-2.5 rounded-lg border cursor-pointer select-none transition-all min-h-[38px]",
               config.showSerialId
                 ? "bg-surface-muted border-google-green/40 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
@@ -456,17 +485,17 @@ export function CardForm({ config, onChange }: CardFormProps) {
               type="checkbox"
               checked={config.showSerialId ?? false}
               onChange={(e) => onChange({ showSerialId: e.target.checked })}
-              className="w-4 h-4 rounded text-google-green bg-surface border-border accent-google-green cursor-pointer"
+              className="w-3.5 h-3.5 rounded text-google-green bg-surface border-border accent-google-green cursor-pointer"
             />
-            <div className="flex items-center gap-1.5 text-xs font-medium">
-              <Hash className="w-3.5 h-3.5 text-secondary" />
+            <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium">
+              <Hash className="w-3.5 h-3.5 shrink-0 text-secondary" />
               <span>Serial ID</span>
             </div>
           </label>
 
           <label
             className={cn(
-              "flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer select-none transition-all min-h-[48px]",
+              "flex items-center gap-2 p-2 sm:p-2.5 rounded-lg border cursor-pointer select-none transition-all min-h-[38px]",
               config.includeBleedMarks
                 ? "bg-surface-muted border-primary/40 text-primary shadow-xs"
                 : "bg-surface border-border hover:border-border-hover text-secondary hover:text-primary"
@@ -476,11 +505,11 @@ export function CardForm({ config, onChange }: CardFormProps) {
               type="checkbox"
               checked={config.includeBleedMarks}
               onChange={(e) => onChange({ includeBleedMarks: e.target.checked })}
-              className="w-4 h-4 rounded text-primary bg-surface border-border accent-primary cursor-pointer"
+              className="w-3.5 h-3.5 rounded text-primary bg-surface border-border accent-primary cursor-pointer"
             />
-            <div className="flex items-center gap-1.5 text-xs font-medium">
-              <Crop className="w-3.5 h-3.5 text-secondary" />
-              <span>Garis Bleed</span>
+            <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium">
+              <Crop className="w-3.5 h-3.5 shrink-0 text-secondary" />
+              <span>Bleed</span>
             </div>
           </label>
         </div>
