@@ -19,8 +19,8 @@ export default function WorkbenchPage() {
 
   const [config, setConfig] = React.useState<CardConfig>({
     businessName: "Nusantara Artisan Bistro",
-    tagline: "Beri Ulasan Pengalaman Anda di Google",
-    callToAction: "Pindai kode QR untuk memberikan rating & ulasan bintang 5",
+    tagline: "Beri Ulasan di Google",
+    callToAction: "Scan QR atau tap kartu untuk beri review",
     googleReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
     placeId: "ChIJN1t_tDeuEmsRUsoyG83frY4",
     sizeId: "pvc-cr80-h",
@@ -52,11 +52,11 @@ export default function WorkbenchPage() {
                 Google Review Card
               </h1>
               <span className="hidden sm:inline-flex text-[10px] font-mono text-google-green bg-google-green/10 px-2 py-0.5 rounded border border-google-green/30 font-medium">
-                300 DPI CETAK
+                300 DPI
               </span>
             </div>
             <span className="hidden sm:block text-[11px] text-secondary">
-              Alat desain & cetak kartu QR review Google Maps resmi
+              Bikin dan cetak kartu QR review Google Maps
             </span>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function WorkbenchPage() {
 
           <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-border text-xs text-secondary font-mono">
             <span className="w-2 h-2 rounded-full bg-google-green animate-pulse" />
-            <span>SIAP CETAK FISIK</span>
+            <span>Siap Cetak 300 DPI</span>
           </div>
         </div>
       </header>
@@ -110,7 +110,7 @@ export default function WorkbenchPage() {
                     1
                   </div>
                   <h2 className="text-xs sm:text-sm font-semibold text-primary">
-                    Format & Ukuran Fisik Kartu
+                    Ukuran Kartu
                   </h2>
                 </div>
                 <span className="text-[9.5px] sm:text-[10px] font-mono text-secondary px-2 py-0.5 rounded-full bg-surface-muted border border-border">
@@ -128,7 +128,7 @@ export default function WorkbenchPage() {
                 <div className="flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-google-yellow" />
                   <h3 className="text-[11px] sm:text-xs font-semibold text-primary uppercase tracking-wider">
-                    Tema Visual
+                    Pilihan Tema
                   </h3>
                 </div>
                 <span className="text-[9.5px] sm:text-[10px] font-mono text-secondary px-2 py-0.5 rounded-full bg-surface-muted border border-border">
@@ -149,7 +149,7 @@ export default function WorkbenchPage() {
                 2
               </div>
               <h2 className="text-xs sm:text-sm font-semibold text-primary">
-                Informasi Bisnis & Tautan Google Maps
+                Data Usaha & Link Review
               </h2>
             </div>
 
@@ -166,7 +166,7 @@ export default function WorkbenchPage() {
                 3
               </div>
               <h2 className="text-xs sm:text-sm font-semibold text-primary">
-                Logo Tengah QR Code (Opsional)
+                Logo QR (Opsional)
               </h2>
             </div>
 

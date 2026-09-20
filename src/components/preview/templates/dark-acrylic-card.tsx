@@ -71,10 +71,10 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
               {config.isDynamicMode ? (
                 <div className="space-y-0.5 pt-0.5">
                   <h2 className="text-xs sm:text-[13px] font-black text-white leading-snug font-google-sans tracking-tight">
-                    {config.tagline || "Beri Ulasan Pengalaman Anda di Google"}
+                    {config.tagline || "Beri Ulasan di Google"}
                   </h2>
                   <p className="text-[9.5px] text-zinc-400 font-medium font-google-sans-text leading-tight">
-                    Bagikan rating bintang 5 & ulasan Anda
+                    Beri rating bintang 5 dan ulasan Anda
                   </p>
                 </div>
               ) : (
@@ -151,10 +151,10 @@ export function DarkAcrylicCard({ config }: TemplateProps) {
                     isSquare ? "text-xs line-clamp-2" : "text-sm sm:text-base line-clamp-2"
                   )}
                 >
-                  {config.tagline || "Beri Ulasan Pengalaman Anda di Google"}
+                  {config.tagline || "Beri Ulasan di Google"}
                 </h2>
                 <p className="text-[10px] text-zinc-400 font-medium line-clamp-1 font-google-sans-text">
-                  Bagikan rating bintang 5 & ulasan Anda
+                  Beri rating bintang 5 dan ulasan Anda
                 </p>
               </div>
             ) : (

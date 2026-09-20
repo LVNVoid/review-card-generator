@@ -53,7 +53,7 @@ export function ManageClient({
         setError(res.error || "Gagal memperbarui kartu");
       } else {
         setIsUnlocked(true);
-        setSuccessMsg("Pengaturan kartu berhasil diperbarui!");
+        setSuccessMsg("Perubahan berhasil disimpan.");
       }
     } catch {
       setError("Terjadi kesalahan jaringan");
@@ -69,7 +69,7 @@ export function ManageClient({
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-border shadow-xs">
             <GoogleLogo size={18} />
             <span className="text-xs font-bold font-google-sans text-primary">
-              Portal Manajemen Kartu
+              Pengaturan Kartu
             </span>
           </div>
           <h1 className="text-2xl font-black font-google-sans tracking-tight text-primary">
@@ -127,7 +127,7 @@ export function ManageClient({
 
           <div className="space-y-1.5">
             <label className="block text-xs font-bold text-primary font-google-sans uppercase tracking-wider">
-              Link Tujuan Ulasan Google
+              Link Review Google Maps
             </label>
             <Input
               value={googleReviewUrl}
@@ -141,7 +141,7 @@ export function ManageClient({
             <div className="flex items-center gap-1.5">
               <Lock size={14} className="text-secondary" />
               <label className="text-xs font-bold text-primary font-google-sans uppercase tracking-wider">
-                Verifikasi PIN Kartu
+                PIN Kartu
               </label>
             </div>
             <Input
@@ -150,7 +150,7 @@ export function ManageClient({
               maxLength={8}
               value={pin}
               onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
-              placeholder="Masukkan PIN pemilik kartu"
+              placeholder="Masukkan PIN"
               className="bg-canvas font-mono text-center tracking-widest"
               required
             />
@@ -163,7 +163,7 @@ export function ManageClient({
             disabled={loading}
             className="w-full font-google-sans text-sm"
           >
-            {loading ? "Menyimpan Perubahan..." : "Simpan Perubahan"}
+            {loading ? "Menyimpan..." : "Simpan Perubahan"}
           </Button>
         </form>
 
@@ -174,7 +174,7 @@ export function ManageClient({
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-xs text-google-blue hover:underline"
           >
-            <span>Uji Buka URL Review</span>
+            <span>Tes Buka Review</span>
             <ExternalLink size={13} />
           </a>
         </div>

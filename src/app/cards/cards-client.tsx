@@ -134,11 +134,11 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
                 Daftar Kartu QR
               </h1>
               <span className="hidden sm:inline-flex text-[10px] font-mono text-google-green bg-google-green/10 px-2 py-0.5 rounded border border-google-green/30 font-medium">
-                DATABASE LIVE
+                Database
               </span>
             </div>
             <span className="hidden sm:block text-[11px] text-secondary">
-              Kelola status dan riwayat kartu Google Review NFC/QR
+              Daftar kartu Google Review yang sudah dibuat
             </span>
           </div>
         </div>
@@ -185,7 +185,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <div className="text-lg sm:text-2xl font-bold font-google-sans text-primary">
               {metrics.total}
             </div>
-            <span className="text-[10px] text-secondary">Unit terdaftar</span>
+            <span className="text-[10px] text-secondary">Kartu dibuat</span>
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-2xl bg-surface border border-border space-y-1 shadow-xs">
@@ -198,7 +198,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <div className="text-lg sm:text-2xl font-bold font-google-sans text-google-green">
               {metrics.active}
             </div>
-            <span className="text-[10px] text-secondary">Terpasang di toko</span>
+            <span className="text-[10px] text-secondary">Sudah aktif</span>
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-2xl bg-surface border border-border space-y-1 shadow-xs">
@@ -211,7 +211,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <div className="text-lg sm:text-2xl font-bold font-google-sans text-google-yellow">
               {metrics.pending}
             </div>
-            <span className="text-[10px] text-secondary">Siap dijual / aktivasi</span>
+            <span className="text-[10px] text-secondary">Belum diisi toko</span>
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-2xl bg-surface border border-border space-y-1 shadow-xs">
@@ -224,7 +224,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <div className="text-lg sm:text-2xl font-bold font-google-sans text-m3-primary">
               {metrics.totalScans}
             </div>
-            <span className="text-[10px] text-secondary">Interaksi pelanggan</span>
+            <span className="text-[10px] text-secondary">Jumlah scan</span>
           </div>
         </div>
 
@@ -236,7 +236,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari ID kartu / nama toko / batch..."
+              placeholder="Cari ID, nama toko, atau batch..."
               className="pl-8 h-9.5 text-xs sm:text-sm bg-canvas rounded-xl"
             />
           </div>
@@ -290,12 +290,12 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
             </div>
             <div className="space-y-1">
               <h3 className="text-sm font-semibold text-primary font-google-sans">
-                Tidak ada kartu ditemukan
+                Kartu tidak ditemukan
               </h3>
               <p className="text-xs text-secondary max-w-sm mx-auto font-google-sans-text">
                 {searchQuery
-                  ? "Coba ganti kata kunci pencarian atau bersihkan filter status."
-                  : "Belum ada kartu di database. Buat kartu pertama Anda di generator."}
+                  ? "Coba kata kunci lain atau pilih filter status berbeda."
+                  : "Belum ada kartu di database. Klik tombol di atas untuk membuat kartu baru."}
               </p>
             </div>
             {searchQuery ? (
@@ -305,7 +305,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
                 onClick={() => setSearchQuery("")}
                 className="text-xs"
               >
-                Reset Pencarian
+                Hapus Pencarian
               </Button>
             ) : (
               <Link href="/">
@@ -364,7 +364,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
                       ) : (
                         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-semibold font-google-sans bg-google-yellow/10 text-google-yellow border border-google-yellow/30">
                           <Clock size={11} />
-                          <span>MENUNGGU AKTIVASI</span>
+                          <span>BELUM AKTIF</span>
                         </span>
                       )}
                     </div>
@@ -375,7 +375,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
                     <h3 className="text-sm sm:text-base font-bold text-primary font-google-sans truncate">
                       {card.businessName || (
                         <span className="text-secondary italic font-normal text-xs sm:text-sm">
-                          (Belum diaktivasi — siap jual ke toko/resto)
+                          (Belum diaktifkan)
                         </span>
                       )}
                     </h3>
@@ -404,7 +404,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
                   <div className="pt-2 border-t border-border flex flex-wrap items-center justify-between gap-y-1 text-[10.5px] text-secondary font-mono">
                     <div className="flex items-center gap-3">
                       <span className="text-primary font-bold">
-                        👁️ {card.scanCount}x scan
+                        {card.scanCount} scan
                       </span>
                       <span>Dibuat: {formatDate(card.createdAt)}</span>
                     </div>
@@ -443,7 +443,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
                             className="w-full h-8 text-xs font-google-sans cursor-pointer hover:text-google-blue"
                           >
                             <ExternalLink size={13} />
-                            <span>Uji Scan</span>
+                            <span>Tes Link</span>
                           </Button>
                         </a>
 
@@ -479,7 +479,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
                             className="w-full h-8 text-xs font-google-sans cursor-pointer text-google-yellow hover:text-google-yellow"
                           >
                             <ExternalLink size={13} />
-                            <span>Form Aktivasi</span>
+                            <span>Aktivasi</span>
                           </Button>
                         </a>
 
@@ -543,7 +543,7 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
 
             <div className="text-center space-y-1">
               <h4 className="text-sm font-bold text-primary font-google-sans truncate">
-                {activeQrModal.businessName || "Kartu Kosong (Belum Diaktivasi)"}
+                {activeQrModal.businessName || "Kartu Kosong (Belum Diaktifkan)"}
               </h4>
               <p className="text-xs text-secondary font-mono truncate">
                 {`${origin}/r/${activeQrModal.id}`}
@@ -562,8 +562,8 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
 
             <p className="text-[11px] text-center text-secondary font-google-sans-text leading-relaxed">
               {activeQrModal.status === "ACTIVE"
-                ? "Scan QR ini langsung membuka form ulasan bintang 5 Google Maps."
-                : "Scan QR ini membawa pemilik kartu ke form aktivasi mandiri."}
+                ? "Scan QR ini langsung membuka form review Google Maps."
+                : "Scan QR ini membuka halaman aktivasi kartu."}
             </p>
 
             <div className="flex items-center gap-2 pt-1">

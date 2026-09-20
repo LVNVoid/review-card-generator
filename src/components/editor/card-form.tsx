@@ -63,9 +63,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
         isDynamicMode: true,
         cardId: newId,
         businessName: "",
-        tagline: "Beri Ulasan Pengalaman Anda di Google",
+        tagline: "Beri Ulasan di Google",
         badgeText: "SCAN ATAU TAP DI SINI",
-        callToAction: "Dekatkan ponsel atau pindai QR code untuk ulasan bintang 5",
+        callToAction: "Scan QR atau tap kartu untuk beri review",
         showSerialId: false,
         googleReviewUrl: `${origin}/r/${newId}`,
       });
@@ -73,9 +73,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
       onChange({
         isDynamicMode: false,
         businessName: "Nusantara Artisan Bistro",
-        tagline: "Beri Ulasan Pengalaman Anda di Google",
+        tagline: "Beri Ulasan di Google",
         badgeText: "SCAN ATAU TAP DI SINI",
-        callToAction: "Dekatkan ponsel atau pindai QR code untuk ulasan bintang 5",
+        callToAction: "Scan QR atau tap kartu untuk beri review",
         showSerialId: false,
         googleReviewUrl: urlInput || "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
       });
@@ -200,7 +200,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
           )}
         >
           <LinkIcon size={13} className={!config.isDynamicMode ? "text-m3-primary" : ""} />
-          <span className="truncate">Link Ulasan Langsung</span>
+          <span className="truncate">Link Langsung</span>
         </button>
 
         <button
@@ -214,7 +214,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
           )}
         >
           <QrCode size={13} className={config.isDynamicMode ? "text-google-yellow" : ""} />
-          <span className="truncate">Pra-Cetak Kosong</span>
+          <span className="truncate">Cetak Kosong</span>
         </button>
       </div>
 
@@ -226,11 +226,11 @@ export function CardForm({ config, onChange }: CardFormProps) {
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-google-green animate-pulse" />
                 <span className="text-xs font-bold font-google-sans uppercase tracking-wider text-primary">
-                  Sistem Kartu Dinamis & Aktivasi
+                  Kartu Kosong (Aktivasi Nanti)
                 </span>
               </div>
               <p className="text-[11px] text-secondary font-google-sans-text leading-relaxed">
-                Cetak kartu dengan QR code unik ini terlebih dahulu. Saat ada pembeli, mereka cukup scan QR untuk mengaktifkan kartu dan memasukkan link Google Review tokonya.
+                Cetak kartu dulu tanpa nama toko. Pembeli tinggal scan QR untuk pasang link tokonya sendiri.
               </p>
             </div>
           </div>
@@ -239,7 +239,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
           <div className="p-3 bg-canvas border border-border rounded-xl flex items-center justify-between gap-2">
             <div className="space-y-0.5">
               <span className="text-[10px] uppercase font-mono text-secondary">
-                Serial Kartu Cetak:
+                ID Kartu:
               </span>
               <div className="font-mono text-sm font-bold text-google-blue">
                 {config.cardId || "Membuat ID..."}
@@ -267,7 +267,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
                   className="inline-flex items-center gap-1 h-8 px-2.5 rounded-lg border border-border text-[11px] text-secondary hover:text-primary hover:bg-surface transition-colors"
                 >
                   <ExternalLink size={12} />
-                  <span>Uji Alur</span>
+                  <span>Buka Link</span>
                 </a>
               )}
             </div>
@@ -275,14 +275,14 @@ export function CardForm({ config, onChange }: CardFormProps) {
 
           {/* Target URL Preview */}
           <div className="space-y-1">
-            <Label>Target URL QR Code Fisik</Label>
+            <Label>Link Target QR</Label>
             <Input
               value={config.googleReviewUrl}
               readOnly
               className="bg-canvas font-mono text-xs text-secondary cursor-not-allowed"
             />
             <p className="text-[10px] text-secondary font-mono">
-              Otomatis mengarah ke portal aktivasi bila belum terisi, dan otomatis redirect 307 ke ulasan Google bila sudah aktif.
+              Jika belum aktif mengarah ke halaman aktivasi. Jika sudah aktif langsung buka review Google.
             </p>
           </div>
 
@@ -290,10 +290,10 @@ export function CardForm({ config, onChange }: CardFormProps) {
           <div className="p-3.5 rounded-xl bg-canvas border border-border space-y-1.5 pt-3">
             <div className="flex items-center gap-1.5 text-xs font-bold text-google-yellow font-google-sans uppercase tracking-wider">
               <Sparkles size={14} />
-              <span>Kartu Universal Siap Jual</span>
+              <span>Siap untuk Stok Jualan</span>
             </div>
             <p className="text-[11px] text-secondary font-google-sans-text leading-relaxed">
-              Kartu ini dicetak <strong>tanpa nama toko</strong> agar siap Anda jual atau distribusikan langsung ke toko atau resto mana pun. Toko pembeli akan mengisikan nama tokonya sendiri saat aktivasi kartu via scan QR.
+              Kartu dicetak tanpa nama toko. Cocok untuk stok yang dijual ke berbagai tempat.
             </p>
           </div>
         </div>
@@ -301,14 +301,14 @@ export function CardForm({ config, onChange }: CardFormProps) {
         /* Direct Custom Review URL Mode */
         <div className="space-y-2">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
-            <Label required>Link Review Google Maps / Place ID</Label>
+            <Label required>Link Review Google Maps</Label>
             <button
               type="button"
               onClick={() => setIsLocationModalOpen(true)}
               className="text-xs font-bold font-google-sans text-google-blue hover:underline inline-flex items-center gap-1.5 cursor-pointer bg-google-blue/10 px-2.5 py-1 rounded-lg border border-google-blue/20 transition-colors hover:bg-google-blue/15 self-start sm:self-auto min-h-[32px]"
             >
               <Search size={12} />
-              <span>Bantu Cari Lokasi</span>
+              <span>Cari di Google Maps</span>
             </button>
           </div>
           <Input
@@ -321,16 +321,16 @@ export function CardForm({ config, onChange }: CardFormProps) {
             {isConvertingUrl ? (
               <span className="text-google-blue flex items-center gap-1 font-mono animate-pulse">
                 <Loader2 className="w-3.5 h-3.5 animate-spin shrink-0" />
-                Mengonversi shortlink ke form ulasan langsung...
+                Mencari link ulasan langsung...
               </span>
             ) : urlStatus.isValid ? (
               <span className="text-google-green flex items-center gap-1 font-mono">
                 <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                 {urlStatus.isDirectReview
-                  ? "Form ulasan bintang 5 langsung aktif saat di-scan"
+                  ? "Langsung buka form ulasan bintang 5"
                   : urlStatus.type === "place_id"
-                  ? "Google Place ID terdeteksi (Form ulasan langsung)"
-                  : "Format link review resmi terverifikasi"}
+                  ? "Place ID valid (langsung buka ulasan)"
+                  : "Link Google Maps valid"}
               </span>
             ) : (
               <span className="text-secondary font-mono text-[10px]">
@@ -342,7 +342,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
           {/* Business Name */}
           <div className="space-y-1.5 pt-1">
             <div className="flex items-center justify-between">
-              <Label required>Nama Tempat / Usaha</Label>
+              <Label required>Nama Tempat Usaha</Label>
               <span className="text-[10px] font-mono text-secondary">
                 {config.businessName.length}/60 karakter
               </span>
@@ -366,10 +366,10 @@ export function CardForm({ config, onChange }: CardFormProps) {
         >
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-primary font-google-sans">
-              Kustomisasi Teks Kartu
+              Ubah Teks Kartu
             </span>
             <span className="text-[9.5px] text-secondary font-mono bg-surface px-1.5 py-0.5 rounded border border-border">
-              Tagline, Badge, CTA
+              Judul, Badge, CTA
             </span>
           </div>
           {showTextCustomization ? (
@@ -383,17 +383,17 @@ export function CardForm({ config, onChange }: CardFormProps) {
           <div className="p-3 pt-1 border-t border-border space-y-2.5 bg-surface">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               <div className="space-y-1">
-                <Label>Tagline Kartu (Atas)</Label>
+                <Label>Judul Atas</Label>
                 <Input
                   value={config.tagline}
                   maxLength={80}
                   onChange={(e) => onChange({ tagline: e.target.value })}
-                  placeholder="Beri Ulasan Pengalaman Anda di Google"
+                  placeholder="Beri Ulasan di Google"
                 />
               </div>
 
               <div className="space-y-1">
-                <Label>Teks Badge Tombol</Label>
+                <Label>Teks Badge QR</Label>
                 <Input
                   value={config.badgeText ?? "SCAN ATAU TAP DI SINI"}
                   maxLength={40}
@@ -403,12 +403,12 @@ export function CardForm({ config, onChange }: CardFormProps) {
               </div>
 
               <div className="space-y-1">
-                <Label>Call to Action (Bawah)</Label>
+                <Label>Teks Bawah</Label>
                 <Input
                   value={config.callToAction}
                   maxLength={100}
                   onChange={(e) => onChange({ callToAction: e.target.value })}
-                  placeholder="Pindai QR code untuk ulasan bintang 5"
+                  placeholder="Scan QR atau tap kartu untuk beri review"
                 />
               </div>
             </div>
@@ -419,7 +419,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
       {/* Quick Toggles */}
       <div className="pt-2 border-t border-border space-y-2">
         <span className="text-[10px] sm:text-[11px] font-mono font-semibold text-secondary uppercase tracking-wider block">
-          Opsi Tampilan Cetak
+          Pengaturan Tampilan
         </span>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">

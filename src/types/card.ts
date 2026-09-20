@@ -25,7 +25,7 @@ export const CARD_SIZES: Record<CardSizeId, CardSizeConfig> = {
     name: "Kartu PVC Horizontal",
     widthMm: 85.6,
     heightMm: 54.0,
-    description: "Ukuran standar kartu ATM / KTP (CR80 Horizontal)",
+    description: "Kartu seukuran ATM atau KTP (horizontal)",
     badge: "85.6 × 54 mm",
   },
   "pvc-cr80-v": {
@@ -33,7 +33,7 @@ export const CARD_SIZES: Record<CardSizeId, CardSizeConfig> = {
     name: "Kartu PVC Vertikal",
     widthMm: 54.0,
     heightMm: 85.6,
-    description: "Ukuran ID Card / Kartu Gantung (CR80 Vertikal)",
+    description: "Kartu ID vertikal seukuran ATM",
     badge: "54 × 85.6 mm",
   },
   "standee-a6": {
@@ -41,7 +41,7 @@ export const CARD_SIZES: Record<CardSizeId, CardSizeConfig> = {
     name: "Standee Meja A6",
     widthMm: 105.0,
     heightMm: 148.0,
-    description: "Ukuran paling populer untuk akrilik meja kafe/resto",
+    description: "Stand meja akrilik ukuran A6",
     badge: "105 × 148 mm",
   },
   "standee-a7": {
@@ -49,7 +49,7 @@ export const CARD_SIZES: Record<CardSizeId, CardSizeConfig> = {
     name: "Standee Meja A7",
     widthMm: 74.0,
     heightMm: 105.0,
-    description: "Ukuran kompak hemat ruang untuk kasir & meja kecil",
+    description: "Stand meja kecil ukuran A7",
     badge: "74 × 105 mm",
   },
   "sticker-square": {
@@ -57,7 +57,7 @@ export const CARD_SIZES: Record<CardSizeId, CardSizeConfig> = {
     name: "Stiker Kasir Persegi",
     widthMm: 70.0,
     heightMm: 70.0,
-    description: "Stiker persegi untuk mesin kasir, etalase, atau pintu",
+    description: "Stiker kotak untuk kasir atau pintu",
     badge: "70 × 70 mm",
   },
 };
@@ -81,28 +81,28 @@ export const CARD_THEMES: Record<CardThemeId, CardThemeConfig> = {
   "google-official": {
     id: "google-official",
     name: "Google Official",
-    description: "Tampilan resmi Google putih bersih, logo G, dan bintang emas",
-    tag: "Clean & Official",
+    description: "Kartu putih standar Google",
+    tag: "Putih",
   },
   "dark-acrylic": {
     id: "dark-acrylic",
     name: "Dark Acrylic",
-    description: "Nuansa gelap eksklusif untuk resto, kafe malam, dan lounge",
-    tag: "Luxury Dark",
+    description: "Latar hitam untuk resto, kafe, atau bar",
+    tag: "Hitam",
   },
   "minimalist": {
     id: "minimalist",
     name: "Minimalist Studio",
-    description: "Tipografi elegan modern dengan garis batas presisi",
-    tag: "Monochrome Modern",
+    description: "Desain monokrom hitam putih sederhana",
+    tag: "Monokrom",
   },
 };
 
 export const CardConfigSchema = z.object({
   businessName: z.string().max(60).default(""),
-  tagline: z.string().max(80).default("Review Usaha Kami di Google"),
-  callToAction: z.string().max(100).default("Pindai kode QR untuk memberikan rating & ulasan bintang 5"),
-  googleReviewUrl: z.string().url("Format URL review tidak valid"),
+  tagline: z.string().max(80).default("Beri Ulasan di Google"),
+  callToAction: z.string().max(100).default("Scan QR atau tap kartu untuk beri review"),
+  googleReviewUrl: z.string().url("Format link ulasan tidak valid"),
   placeId: z.string().optional(),
   sizeId: CardSizeIdSchema.default("pvc-cr80-h"),
   themeId: CardThemeIdSchema.default("google-official"),

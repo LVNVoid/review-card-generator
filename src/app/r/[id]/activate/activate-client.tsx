@@ -144,7 +144,7 @@ export function ActivateClient({
               Kartu Berhasil Diaktifkan!
             </h1>
             <p className="text-sm text-secondary font-google-sans-text leading-relaxed">
-              Mulai sekarang, setiap pelanggan yang men-scan QR code atau menempelkan HP ke chip NFC kartu ini akan otomatis diarahkan ke profil ulasan Google bisnis Anda.
+              Pelanggan yang scan QR atau tap kartu langsung diarahkan ke halaman review Google Anda.
             </p>
           </div>
 
@@ -167,12 +167,12 @@ export function ActivateClient({
               rel="noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 h-11 px-4 text-sm font-semibold rounded-xl bg-google-blue text-white shadow-sm hover:opacity-90 transition-opacity"
             >
-              <span>Uji Coba Scan (Buka Ulasan)</span>
+              <span>Coba Buka Review</span>
               <ExternalLink size={16} />
             </a>
 
             <p className="text-[11px] text-secondary font-google-sans-text">
-              Simpan nomor PIN Anda dengan aman. PIN dibutuhkan jika sewaktu-waktu Anda ingin memperbarui tautan review bisnis Anda.
+              Simpan PIN Anda untuk mengganti link review di kemudian hari.
             </p>
           </div>
         </div>
@@ -188,14 +188,14 @@ export function ActivateClient({
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-border shadow-xs">
             <GoogleLogo size={18} />
             <span className="text-xs font-bold font-google-sans text-primary">
-              Google Review Setup
+              Setup Kartu Review
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black font-google-sans tracking-tight text-primary">
-            Aktivasi Kartu Ulasan
+            Aktivasi Kartu Review
           </h1>
           <p className="text-xs sm:text-sm text-secondary font-google-sans-text">
-            Hubungkan kartu fisik Anda dengan halaman profil ulasan Google Maps bisnis Anda.
+            Masukkan link Google Maps untuk mengaktifkan kartu ini.
           </p>
         </div>
 
@@ -203,7 +203,7 @@ export function ActivateClient({
         <div className="flex items-center justify-between px-4 py-2.5 bg-surface border border-border rounded-xl">
           <div className="flex items-center gap-2">
             <Sparkles size={16} className="text-google-yellow" />
-            <span className="text-xs text-secondary font-medium">ID Kartu Fisik:</span>
+            <span className="text-xs text-secondary font-medium">ID Kartu:</span>
           </div>
           <span className="font-mono text-xs sm:text-sm font-bold text-google-blue bg-surface-muted px-2.5 py-0.5 rounded border border-border">
             {cardId}
@@ -254,7 +254,7 @@ export function ActivateClient({
                   className="text-xs font-bold font-google-sans text-google-blue hover:underline inline-flex items-center gap-1.5 cursor-pointer bg-google-blue/10 px-2.5 py-1 rounded-lg border border-google-blue/20 transition-colors hover:bg-google-blue/15 min-h-[32px]"
                 >
                   <Search size={12} />
-                  <span>Bantu Cari Lokasi</span>
+                  <span>Cari di Google Maps</span>
                 </button>
                 <button
                   type="button"
@@ -278,22 +278,22 @@ export function ActivateClient({
             {isConvertingUrl ? (
               <div className="flex items-center gap-1.5 text-[11px] text-google-blue font-mono pt-0.5 animate-pulse">
                 <Loader2 size={13} className="shrink-0 animate-spin" />
-                <span>Mengonversi shortlink ke format ulasan langsung Google...</span>
+                <span>Mencari link ulasan langsung...</span>
               </div>
             ) : googleReviewUrl ? (
               <div className="flex items-center gap-1.5 text-[11px] text-google-green font-google-sans-text pt-0.5">
                 <CheckCircle2 size={13} className="shrink-0 text-google-green" />
-                <span>Kartu fisik otomatis memunculkan pop-up form ulasan 5-bintang saat di-scan pelanggan.</span>
+                <span>Scan kartu langsung membuka form review Google.</span>
               </div>
             ) : null}
 
             {showHelper && (
               <div className="p-3.5 rounded-xl bg-canvas border border-border text-xs text-secondary space-y-2">
-                <p className="font-bold text-primary">Cara mendapatkan link ulasan langsung Google:</p>
+                <p className="font-bold text-primary">Cara ambil link ulasan Google:</p>
                 <ol className="list-decimal list-inside space-y-1.5 text-[11px] leading-relaxed">
                   <li>Buka aplikasi <strong>Google Maps</strong> atau cari nama toko Anda di <strong>Google Search</strong>.</li>
                   <li>Pilih tombol <strong>Minta Ulasan</strong> atau di tab Ulasan klik <strong>Bagikan formulir ulasan</strong>.</li>
-                  <li>Atau klik tombol <strong>Bantu Cari Lokasi</strong> di atas untuk mengambil tautan ulasan secara instan.</li>
+                  <li>Atau klik <strong>Cari di Google Maps</strong> di atas untuk cari otomatis.</li>
                 </ol>
               </div>
             )}
@@ -306,11 +306,11 @@ export function ActivateClient({
             <div className="flex items-center gap-1.5">
               <ShieldCheck size={16} className="text-google-green" />
               <label className="text-xs font-bold text-primary font-google-sans uppercase tracking-wider">
-                3. Buat PIN Keamanan (4-8 Digit Angka)
+                3. PIN Keamanan (4-8 Angka)
               </label>
             </div>
             <p className="text-[11px] text-secondary font-google-sans-text">
-              Diperlukan jika nanti Anda ingin mengubah link ulasan atau memindahkan kartu ke cabang lain.
+              Dipakai jika nanti Anda ingin mengubah link ulasan toko.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -350,7 +350,7 @@ export function ActivateClient({
               disabled={loading}
               className="w-full font-google-sans text-sm tracking-wide"
             >
-              {loading ? "Memproses Aktivasi..." : "Aktifkan Kartu Sekarang"}
+              {loading ? "Menyimpan..." : "Aktifkan Kartu"}
             </Button>
           </div>
         </form>
@@ -359,7 +359,7 @@ export function ActivateClient({
         <div className="text-center space-y-1">
           <div className="flex items-center justify-center gap-1 text-xs text-secondary">
             <GoogleReviewStars size={13} />
-            <span>Terintegrasi Standar Google Maps Review NFC & QR</span>
+            <span>Format review Google Maps</span>
           </div>
         </div>
       </div>

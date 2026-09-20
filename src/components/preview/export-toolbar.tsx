@@ -33,7 +33,7 @@ export function ExportToolbar({ config, cardRef }: ExportToolbarProps) {
       });
     } catch (err) {
       console.error("PDF export error:", err);
-      alert("Gagal mengekspor PDF. Pastikan browser mengizinkan unduhan.");
+      alert("Gagal membuat PDF. Coba ulangi.");
     } finally {
       setIsExportingPdf(false);
     }
@@ -51,7 +51,7 @@ export function ExportToolbar({ config, cardRef }: ExportToolbarProps) {
       });
     } catch (err) {
       console.error("PNG export error:", err);
-      alert("Gagal mengekspor PNG. Silakan coba lagi.");
+      alert("Gagal membuat PNG. Coba ulangi.");
     } finally {
       setIsExportingPng(false);
     }
@@ -70,12 +70,12 @@ export function ExportToolbar({ config, cardRef }: ExportToolbarProps) {
         {isExportingPdf ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Membuat PDF Siap Cetak...</span>
+            <span>Menyiapkan PDF...</span>
           </>
         ) : (
           <>
             <FileDown className="w-4 h-4" />
-            <span>Download PDF (300 DPI Cetak)</span>
+            <span>Download PDF (300 DPI)</span>
           </>
         )}
       </Button>
@@ -91,12 +91,12 @@ export function ExportToolbar({ config, cardRef }: ExportToolbarProps) {
         {isExportingPng ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Memproses PNG...</span>
+            <span>Menyiapkan PNG...</span>
           </>
         ) : (
           <>
             <ImageDown className="w-4 h-4" />
-            <span>Download PNG HD</span>
+            <span>Download PNG</span>
           </>
         )}
       </Button>
