@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { createBlankCardAction } from "@/actions/card-actions";
+import { LocationFinderModal } from "./location-finder-modal";
 import {
   CheckCircle2,
   HelpCircle,
@@ -18,6 +19,7 @@ import {
   Link as LinkIcon,
   RefreshCw,
   ExternalLink,
+  Search,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +38,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
 
   const [isGeneratingId, setIsGeneratingId] = React.useState(false);
   const [registeredInDb, setRegisteredInDb] = React.useState(false);
+  const [isLocationModalOpen, setIsLocationModalOpen] = React.useState(false);
 
   // Initialize dynamic mode with a card ID if enabled and none exists
   React.useEffect(() => {
@@ -112,6 +115,22 @@ export function CardForm({ config, onChange }: CardFormProps) {
         googleReviewUrl: resolved.targetUrl,
         placeId: resolved.type === "place_id" ? value.trim() : undefined,
       });
+    }
+  };
+
+  const handleLocationSelect = ({
+    businessName,
+    reviewUrl,
+  }: {
+    businessName?: string;
+    reviewUrl: string;
+  }) => {
+    handleUrlChange(reviewUrl);
+    if (
+      businessName &&
+      (!config.businessName || config.businessName === "Nusantara Artisan Bistro")
+    ) {
+      onChange({ businessName });
     }
   };
 
@@ -232,10 +251,14 @@ export function CardForm({ config, onChange }: CardFormProps) {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Label required>Link Review Google Maps / Place ID</Label>
-            <span className="text-[11px] text-secondary flex items-center gap-1 font-mono">
-              <HelpCircle className="w-3 h-3 text-secondary" />
-              Opsi Gratis tanpa API Key
-            </span>
+            <button
+              type="button"
+              onClick={() => setIsLocationModalOpen(true)}
+              className="text-xs font-bold font-google-sans text-google-blue hover:underline inline-flex items-center gap-1 cursor-pointer bg-google-blue/10 px-2 py-0.5 rounded-lg border border-google-blue/20 transition-colors hover:bg-google-blue/15"
+            >
+              <Search size={12} />
+              <span>Bantu Cari Lokasi</span>
+            </button>
           </div>
           <Input
             value={urlInput}
@@ -377,6 +400,13 @@ export function CardForm({ config, onChange }: CardFormProps) {
           </label>
         </div>
       </div>
+
+      <LocationFinderModal
+        isOpen={isLocationModalOpen}
+        onClose={() => setIsLocationModalOpen(false)}
+        onSelect={handleLocationSelect}
+        initialQuery={config.businessName}
+      />
     </div>
   );
 }

@@ -6,7 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { activateCardAction } from "@/actions/card-actions";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, AlertCircle, ExternalLink, HelpCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { LocationFinderModal } from "@/components/editor/location-finder-modal";
+import {
+  CheckCircle2,
+  AlertCircle,
+  ExternalLink,
+  HelpCircle,
+  ShieldCheck,
+  Sparkles,
+  Search,
+} from "lucide-react";
 
 interface ActivateClientProps {
   cardId: string;
@@ -29,6 +38,14 @@ export function ActivateClient({
   const [error, setError] = React.useState<string | null>(null);
   const [isSuccess, setIsSuccess] = React.useState(initialStatus === "ACTIVE");
   const [showHelper, setShowHelper] = React.useState(false);
+  const [showLocationModal, setShowLocationModal] = React.useState(false);
+
+  const handleLocationSelect = (data: { businessName?: string; reviewUrl: string }) => {
+    if (data.businessName && !businessName.trim()) {
+      setBusinessName(data.businessName);
+    }
+    setGoogleReviewUrl(data.reviewUrl);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -202,14 +219,24 @@ export function ActivateClient({
               <label className="block text-xs font-bold text-primary font-google-sans uppercase tracking-wider">
                 2. Link Google Review / Maps
               </label>
-              <button
-                type="button"
-                onClick={() => setShowHelper(!showHelper)}
-                className="text-[11px] text-google-blue hover:underline inline-flex items-center gap-1 cursor-pointer"
-              >
-                <HelpCircle size={12} />
-                <span>Cara dapat link ulasan</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowLocationModal(true)}
+                  className="text-xs font-bold font-google-sans text-google-blue hover:underline inline-flex items-center gap-1 cursor-pointer bg-google-blue/10 px-2 py-0.5 rounded-lg border border-google-blue/20 transition-colors hover:bg-google-blue/15"
+                >
+                  <Search size={11} />
+                  <span>Bantu Cari Lokasi</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowHelper(!showHelper)}
+                  className="text-[11px] text-secondary hover:text-primary inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <HelpCircle size={12} />
+                  <span>Panduan</span>
+                </button>
+              </div>
             </div>
 
             <Input
@@ -296,6 +323,13 @@ export function ActivateClient({
           </div>
         </div>
       </div>
+
+      <LocationFinderModal
+        isOpen={showLocationModal}
+        onClose={() => setShowLocationModal(false)}
+        onSelect={handleLocationSelect}
+        initialQuery={businessName}
+      />
     </div>
   );
 }
