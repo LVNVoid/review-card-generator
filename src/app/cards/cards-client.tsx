@@ -116,16 +116,8 @@ export function CardsClient({ initialCards, initialMetrics }: CardsClientProps) 
 
   return (
     <div className="min-h-screen flex flex-col bg-canvas text-primary pb-20">
-      {/* Google 4-Color Ambient Top Stripe */}
-      <div className="h-[2.5px] w-full grid grid-cols-4 sticky top-0 z-40">
-        <div className="bg-google-blue h-full" />
-        <div className="bg-google-red h-full" />
-        <div className="bg-google-yellow h-full" />
-        <div className="bg-google-green h-full" />
-      </div>
-
       {/* Top Navbar Header */}
-      <header className="h-16 border-b border-border bg-canvas/90 backdrop-blur sticky top-[2.5px] z-30 flex items-center px-3.5 sm:px-6 lg:px-8 justify-between gap-2">
+      <header className="h-16 border-b border-border bg-canvas/90 backdrop-blur sticky top-0 z-30 flex items-center px-3.5 sm:px-6 lg:px-8 justify-between gap-2">
         <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
           <Link
             href="/"

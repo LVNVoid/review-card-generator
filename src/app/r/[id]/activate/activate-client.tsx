@@ -182,9 +182,6 @@ export function ActivateClient({
 
   return (
     <div className="min-h-screen bg-canvas text-primary flex flex-col items-center justify-center p-4 sm:p-6 selection:bg-google-blue selection:text-white">
-      {/* Top 4-Color Google Ambient Stripe */}
-      <div className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-google-blue via-google-red via-google-yellow to-google-green z-50" />
-
       <div className="w-full max-w-lg space-y-6">
         {/* Header Branding */}
         <div className="text-center space-y-2">

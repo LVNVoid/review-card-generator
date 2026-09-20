@@ -64,8 +64,6 @@ export function ManageClient({
 
   return (
     <div className="min-h-screen bg-canvas text-primary flex flex-col items-center justify-center p-4 sm:p-6">
-      <div className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-google-blue via-google-red via-google-yellow to-google-green z-50" />
-
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-border shadow-xs">

@@ -39,16 +39,8 @@ export default function WorkbenchPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-canvas text-primary pb-28 md:pb-16">
-      {/* Google 4-Color Ambient Top Stripe */}
-      <div className="h-[2.5px] w-full grid grid-cols-4 sticky top-0 z-40">
-        <div className="bg-google-blue h-full" />
-        <div className="bg-google-red h-full" />
-        <div className="bg-google-yellow h-full" />
-        <div className="bg-google-green h-full" />
-      </div>
-
       {/* Top Navbar Header with Google Identity */}
-      <header className="h-16 border-b border-border bg-canvas/90 backdrop-blur sticky top-[2.5px] z-30 flex items-center px-3.5 sm:px-6 lg:px-8 justify-between">
+      <header className="h-16 border-b border-border bg-canvas/90 backdrop-blur sticky top-0 z-30 flex items-center px-3.5 sm:px-6 lg:px-8 justify-between">
         <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
           <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-surface border border-border flex items-center justify-center shadow-sm shrink-0">
             <GoogleLogo size={20} />
