@@ -33,8 +33,9 @@ export function CardForm({ config, onChange }: CardFormProps) {
   const [urlStatus, setUrlStatus] = React.useState<{
     isValid: boolean;
     type: string;
+    isDirectReview?: boolean;
     message?: string;
-  }>({ isValid: true, type: "direct_review_url" });
+  }>({ isValid: true, type: "direct_review_url", isDirectReview: true });
 
   const [isGeneratingId, setIsGeneratingId] = React.useState(false);
   const [registeredInDb, setRegisteredInDb] = React.useState(false);
@@ -107,6 +108,7 @@ export function CardForm({ config, onChange }: CardFormProps) {
     setUrlStatus({
       isValid: resolved.isValid,
       type: resolved.type,
+      isDirectReview: resolved.isDirectReview,
       message: resolved.errorMessage,
     });
 
@@ -270,8 +272,10 @@ export function CardForm({ config, onChange }: CardFormProps) {
             {urlStatus.isValid ? (
               <span className="text-google-green flex items-center gap-1 font-mono">
                 <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                {urlStatus.type === "place_id"
-                  ? "Google Place ID terdeteksi (Otomatis diarahkan ke review ulasan)"
+                {urlStatus.isDirectReview
+                  ? "Form ulasan bintang 5 langsung aktif saat di-scan"
+                  : urlStatus.type === "place_id"
+                  ? "Google Place ID terdeteksi (Form ulasan langsung)"
                   : "Format link review resmi terverifikasi"}
               </span>
             ) : (

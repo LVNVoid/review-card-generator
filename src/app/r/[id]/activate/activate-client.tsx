@@ -247,13 +247,20 @@ export function ActivateClient({
               className="bg-canvas font-mono text-xs"
             />
 
+            {googleReviewUrl && (
+              <div className="flex items-center gap-1.5 text-[11px] text-google-green font-google-sans-text pt-0.5">
+                <CheckCircle2 size={13} className="shrink-0 text-google-green" />
+                <span>Kartu fisik otomatis memunculkan pop-up form ulasan 5-bintang saat di-scan pelanggan.</span>
+              </div>
+            )}
+
             {showHelper && (
               <div className="p-3.5 rounded-xl bg-canvas border border-border text-xs text-secondary space-y-2">
-                <p className="font-bold text-primary">Cara menyalin tautan ulasan Google:</p>
-                <ol className="list-decimal list-inside space-y-1 text-[11px] leading-relaxed">
-                  <li>Buka profil bisnis Anda di aplikasi Google Maps atau Google Search.</li>
-                  <li>Pilih menu <strong>Dapatkan Ulasan Lainnya</strong> atau <strong>Minta Ulasan</strong>.</li>
-                  <li>Salin link yang muncul (biasanya berformat <code className="text-google-blue">g.page/r/...</code> atau <code className="text-google-blue">maps.app.goo.gl/...</code>).</li>
+                <p className="font-bold text-primary">Cara mendapatkan link ulasan langsung Google:</p>
+                <ol className="list-decimal list-inside space-y-1.5 text-[11px] leading-relaxed">
+                  <li>Buka aplikasi <strong>Google Maps</strong> atau cari nama toko Anda di <strong>Google Search</strong>.</li>
+                  <li>Pilih tombol <strong>Minta Ulasan</strong> atau di tab Ulasan klik <strong>Bagikan formulir ulasan</strong>.</li>
+                  <li>Atau klik tombol <strong>Bantu Cari Lokasi</strong> di atas untuk mengambil tautan ulasan secara instan.</li>
                 </ol>
               </div>
             )}

@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { hashPin, verifyPin, generateCardId } from "@/lib/security";
+import { transformToDirectReviewUrl } from "@/lib/google-review-url";
 
 const ActivateSchema = z.object({
   id: z.string().min(2).max(20),
@@ -46,6 +47,20 @@ export async function activateCardAction(
     };
   }
 
+  // Convert to guaranteed 5-star direct write-review URL
+  let finalReviewUrl = googleReviewUrl;
+  try {
+    const conversion = await expandAndConvertReviewUrlAction(googleReviewUrl);
+    if (conversion.success && conversion.directUrl) {
+      finalReviewUrl = conversion.directUrl;
+    }
+  } catch {
+    const local = transformToDirectReviewUrl(googleReviewUrl);
+    if (local.isDirectReview) {
+      finalReviewUrl = local.directUrl;
+    }
+  }
+
   try {
     const existingCard = await prisma.card.findUnique({
       where: { id: normalizedId },
@@ -64,7 +79,7 @@ export async function activateCardAction(
       where: { id: normalizedId },
       update: {
         businessName,
-        googleReviewUrl,
+        googleReviewUrl: finalReviewUrl,
         pinHash: hash,
         salt,
         status: "ACTIVE",
@@ -73,7 +88,7 @@ export async function activateCardAction(
       create: {
         id: normalizedId,
         businessName,
-        googleReviewUrl,
+        googleReviewUrl: finalReviewUrl,
         pinHash: hash,
         salt,
         status: "ACTIVE",
@@ -85,7 +100,7 @@ export async function activateCardAction(
       success: true,
       cardId: normalizedId,
       businessName,
-      reviewUrl: googleReviewUrl,
+      reviewUrl: finalReviewUrl,
     };
   } catch (error) {
     console.error("Failed to activate card:", error);
@@ -94,6 +109,75 @@ export async function activateCardAction(
       error: "Gagal mengaktifkan kartu. Silakan periksa koneksi atau coba lagi.",
     };
   }
+}
+
+/**
+ * Server action to expand short links (maps.app.goo.gl) and convert to direct review write URL
+ */
+export async function expandAndConvertReviewUrlAction(rawInput: string): Promise<{
+  success: boolean;
+  directUrl: string;
+  isDirectReview: boolean;
+  error?: string;
+}> {
+  const trimmed = rawInput.trim();
+  if (!trimmed) {
+    return { success: false, directUrl: "", isDirectReview: false, error: "Input kosong" };
+  }
+
+  // 1. Try local regex transformation first
+  const localTransform = transformToDirectReviewUrl(trimmed);
+  if (localTransform.isDirectReview) {
+    return {
+      success: true,
+      directUrl: localTransform.directUrl,
+      isDirectReview: true,
+    };
+  }
+
+  // 2. Expand short links like maps.app.goo.gl or goo.gl/maps on server
+  try {
+    const parsed = new URL(trimmed);
+    if (
+      parsed.hostname === "maps.app.goo.gl" ||
+      parsed.hostname === "goo.gl" ||
+      parsed.hostname === "g.page"
+    ) {
+      const response = await fetch(trimmed, {
+        method: "HEAD",
+        redirect: "manual",
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        },
+      });
+
+      const location = response.headers.get("location");
+      if (location) {
+        const expandedTransform = transformToDirectReviewUrl(location);
+        if (expandedTransform.isDirectReview) {
+          return {
+            success: true,
+            directUrl: expandedTransform.directUrl,
+            isDirectReview: true,
+          };
+        }
+        return {
+          success: true,
+          directUrl: location,
+          isDirectReview: false,
+        };
+      }
+    }
+  } catch (err) {
+    console.warn("Failed to expand shortlink:", err);
+  }
+
+  return {
+    success: true,
+    directUrl: trimmed,
+    isDirectReview: false,
+  };
 }
 
 export async function getCardStatusAction(id: string) {
@@ -169,10 +253,23 @@ export async function updateCardUrlAction(data: {
       return { success: false, error: "PIN yang Anda masukkan salah" };
     }
 
+    let finalReviewUrl = data.newReviewUrl;
+    try {
+      const conversion = await expandAndConvertReviewUrlAction(data.newReviewUrl);
+      if (conversion.success && conversion.directUrl) {
+        finalReviewUrl = conversion.directUrl;
+      }
+    } catch {
+      const local = transformToDirectReviewUrl(data.newReviewUrl);
+      if (local.isDirectReview) {
+        finalReviewUrl = local.directUrl;
+      }
+    }
+
     await prisma.card.update({
       where: { id: normalizedId },
       data: {
-        googleReviewUrl: data.newReviewUrl,
+        googleReviewUrl: finalReviewUrl,
         businessName: data.newBusinessName || card.businessName,
       },
     });

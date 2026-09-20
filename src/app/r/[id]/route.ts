@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { transformToDirectReviewUrl } from "@/lib/google-review-url";
 
 export async function GET(
   request: NextRequest,
@@ -40,7 +41,9 @@ export async function GET(
       console.warn("Telemetry log failed:", telemetryErr);
     }
 
-    return NextResponse.redirect(card.googleReviewUrl, { status: 307 });
+    // Always guarantee direct 5-star write review popup format
+    const { directUrl } = transformToDirectReviewUrl(card.googleReviewUrl);
+    return NextResponse.redirect(directUrl || card.googleReviewUrl, { status: 307 });
   } catch (error) {
     console.error("Dynamic redirect error:", error);
     // Fallback directly to activation page so customer can activate, never bounce to homepage
