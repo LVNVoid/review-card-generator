@@ -9,7 +9,8 @@ import { LogoUploader } from "@/components/editor/logo-uploader";
 import { CardCanvas } from "@/components/preview/card-canvas";
 import { ExportToolbar } from "@/components/preview/export-toolbar";
 import { GoogleLogo } from "@/components/ui/google-icons";
-import { Sliders, Eye, Printer, Layers, Compass, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Sliders, Eye, Printer, Layers, Compass, Sparkles, QrCode } from "lucide-react";
 
 export default function WorkbenchPage() {
   const cardRef = React.useRef<HTMLDivElement>(null);
@@ -67,43 +68,61 @@ export default function WorkbenchPage() {
           </div>
         </div>
 
-        {/* Mobile Tab Segmented Switcher */}
-        <div className="flex md:hidden items-center p-1 rounded-xl bg-surface border border-border shrink-0">
-          <button
-            type="button"
-            onClick={() => {
-              setActiveMobileTab("editor");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all min-h-[38px] cursor-pointer ${
-              activeMobileTab === "editor"
-                ? "bg-google-blue text-white shadow-sm font-semibold"
-                : "text-secondary hover:text-primary"
-            }`}
+        {/* Mobile Nav & Tab Switcher */}
+        <div className="flex md:hidden items-center gap-1.5 shrink-0">
+          <Link
+            href="/cards"
+            className="flex items-center justify-center w-[38px] h-[38px] rounded-xl bg-surface border border-border text-secondary hover:text-primary transition-colors cursor-pointer"
+            title="Daftar Kartu QR"
           >
-            <Sliders className="w-3.5 h-3.5" />
-            <span>Editor</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setActiveMobileTab("preview");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all min-h-[38px] cursor-pointer ${
-              activeMobileTab === "preview"
-                ? "bg-google-blue text-white shadow-sm font-semibold"
-                : "text-secondary hover:text-primary"
-            }`}
-          >
-            <Eye className="w-3.5 h-3.5" />
-            <span>Preview</span>
-          </button>
+            <QrCode size={16} />
+          </Link>
+
+          <div className="flex items-center p-1 rounded-xl bg-surface border border-border shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveMobileTab("editor");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all min-h-[38px] cursor-pointer ${
+                activeMobileTab === "editor"
+                  ? "bg-google-blue text-white shadow-sm font-semibold"
+                  : "text-secondary hover:text-primary"
+              }`}
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              <span>Editor</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveMobileTab("preview");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all min-h-[38px] cursor-pointer ${
+                activeMobileTab === "preview"
+                  ? "bg-google-blue text-white shadow-sm font-semibold"
+                  : "text-secondary hover:text-primary"
+              }`}
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span>Preview</span>
+            </button>
+          </div>
         </div>
 
         {/* Desktop Quick Indicator */}
-        <div className="hidden md:flex items-center gap-4 text-xs text-secondary font-mono">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface border border-border">
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            href="/cards"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface border border-border text-xs font-semibold text-primary hover:border-google-blue hover:text-google-blue transition-all cursor-pointer shadow-xs"
+          >
+            <QrCode size={14} className="text-google-blue" />
+            <span>Daftar Kartu QR</span>
+          </Link>
+
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface border border-border text-xs text-secondary font-mono">
             <span className="w-2 h-2 rounded-full bg-google-green animate-pulse" />
             <span>SIAP CETAK FISIK</span>
           </div>

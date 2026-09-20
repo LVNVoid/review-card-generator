@@ -292,3 +292,41 @@ export async function updateCardUrlAction(data: {
     return { success: false, error: "Gagal memperbarui kartu" };
   }
 }
+
+export async function listCardsAction() {
+  try {
+    const cards = await prisma.card.findMany({
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        status: true,
+        businessName: true,
+        tagline: true,
+        googleReviewUrl: true,
+        batchId: true,
+        scanCount: true,
+        activatedAt: true,
+        lastScannedAt: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    const metrics = {
+      total: cards.length,
+      active: cards.filter((c) => c.status === "ACTIVE").length,
+      pending: cards.filter((c) => c.status === "PENDING").length,
+      totalScans: cards.reduce((acc, c) => acc + (c.scanCount || 0), 0),
+    };
+
+    return { success: true, cards, metrics };
+  } catch (error) {
+    console.error("Failed to list cards:", error);
+    return {
+      success: false,
+      error: "Gagal mengambil data kartu",
+      cards: [],
+      metrics: { total: 0, active: 0, pending: 0, totalScans: 0 },
+    };
+  }
+}
